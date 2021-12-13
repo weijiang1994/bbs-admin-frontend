@@ -80,16 +80,10 @@ export default {
           })
           .then((response)=>{
             if (!response.data.success) {
-              this.$message({
-                message: response.data.msg,
-                type: 'error'
-              })
+              this.showMessage(response.data.msg, 'error')
             }
             else{
-              this.$message({
-                message: response.data.msg,
-                type: 'success'
-              })
+              this.showMessage(response.data.msg, 'success')
             }
           })
           .catch(function(error){
@@ -98,6 +92,13 @@ export default {
         }
       });
     },
+    // 显示登录提示信息
+    showMessage(message, type){
+      this.$message({
+        message,
+        type
+      })
+    }
   },
 };
 </script>
