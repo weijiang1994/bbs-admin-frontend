@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import {setToken} from "@/util/auth";
 
 export default {
   data() {
@@ -72,33 +73,35 @@ export default {
   methods: {
     // 提交登录请求
     handleSubmit() {
-      this.$refs.loginForm.validate((valid) => {
+      this.$refs[this.loginForm].validate((valid) => {
         if (valid) {
-          this.axios.post("/auth/login", {
-            username: this.loginForm.username,
-            password: this.loginForm.password,
-          })
-          .then((response)=>{
-            if (!response.data.success) {
-              this.showMessage(response.data.msg, 'error')
-            }
-            else{
-              this.showMessage(response.data.msg, 'success')
-            }
-          })
-          .catch(function(error){
-            console.log(error);
-          })
+          this.axios
+            .post("/auth/login", {
+              username: this.loginForm.username,
+              password: this.loginForm.password,
+            })
+            .then((response) => {
+              if (!response.data.success) {
+                this.showMessage(response.data.msg, "error");
+              } else {
+                this.showMessage(response.data.msg, "success");
+                console.log(response.data.access_token);
+                setToken("Access-Token", response.data.access_token);
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
         }
       });
     },
     // 显示登录提示信息
-    showMessage(message, type){
+    showMessage(message, type) {
       this.$message({
         message,
-        type
-      })
-    }
+        type,
+      });
+    },
   },
 };
 </script>
