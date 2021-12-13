@@ -1,10 +1,10 @@
 <template>
   <div class="login-container">
     <el-form
-      :model="ruleForm2"
-      :rules="rules2"
+      :model="loginForm"
+      :rules="validateRule"
       status-icon
-      ref="ruleForm2"
+      ref="loginForm"
       label-position="left"
       label-width="0px"
       class="demo-ruleForm login-page"
@@ -13,7 +13,7 @@
       <el-form-item prop="username">
         <el-input
           type="text"
-          v-model="ruleForm2.username"
+          v-model="loginForm.username"
           auto-complete="off"
           placeholder="用户名"
         ></el-input>
@@ -21,7 +21,7 @@
       <el-form-item prop="password">
         <el-input
           type="password"
-          v-model="ruleForm2.password"
+          v-model="loginForm.password"
           auto-complete="off"
           placeholder="密码"
         ></el-input>
@@ -41,15 +41,16 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
       logining: false,
-      ruleForm2: {
+      loginForm: {
         username: "",
         password: "",
       },
-      rules2: {
+      validateRule: {
         username: [
           {
             required: true,
@@ -69,26 +70,31 @@ export default {
     };
   },
   methods: {
+    // 提交登录请求
     handleSubmit() {
-      this.$refs.ruleForm2.validate((valid) => {
+      this.$refs.loginForm.validate((valid) => {
         if (valid) {
-          this.logining = true;
-          if (
-            this.ruleForm2.username === "admin" &&
-            this.ruleForm2.password === "123456"
-          ) {
-            this.logining = false;
-            sessionStorage.setItem("user", this.ruleForm2.username);
-            this.$router.push({ path: "/" });
-          } else {
-            this.logining = false;
-            this.$alert("username or password wrong!", "info", {
-              confirmButtonText: "ok",
-            });
-          }
-        } else {
-          console.log("error submit!");
-          return false;
+          this.axios.post("/auth/login", {
+            username: this.loginForm.username,
+            password: this.loginForm.password,
+          })
+          .then((response)=>{
+            if (!response.data.success) {
+              this.$message({
+                message: response.data.msg,
+                type: 'error'
+              })
+            }
+            else{
+              this.$message({
+                message: response.data.msg,
+                type: 'success'
+              })
+            }
+          })
+          .catch(function(error){
+            console.log(error);
+          })
         }
       });
     },
