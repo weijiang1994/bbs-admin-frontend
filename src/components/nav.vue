@@ -26,18 +26,19 @@
             <span slot="title">后台中心</span>
           </el-menu-item>
 
-          <el-menu-item index="2" @click="goPage('order')">
-            <i class="el-icon-s-order"></i>
-            <span slot="title">订单列表</span>
+          <el-menu-item index="2" @click="goPage('user')">
+            <i class="el-icon-document"></i>
+            <span slot="title">用户管理</span>
           </el-menu-item>
 
           <el-submenu index="3">
             <template slot="title">
               <i class="el-icon-location"></i>
-              <span>测试3</span>
+              <span>帖子管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="3-1">测试3-1</el-menu-item>
+              <el-menu-item index="3-1">帖子审核</el-menu-item>
+              <el-menu-item index="3-2">帖子编辑</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -67,8 +68,8 @@ export default {
     goPage(link) {
       if (link === "home") {
         $this.$router.push("/index").catch(error => error);
-      } else if ((link === "order")) {
-        $this.$router.push("/order").catch(error => error);
+      } else if ((link === "user")) {
+        $this.$router.push("/user").catch(error => error);
       }
     }
   }

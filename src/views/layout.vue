@@ -1,11 +1,3 @@
-<!--
- * @Author: your name
- * @Date: 2020-04-13 10:56:45
- * @LastEditTime: 2020-04-13 18:57:16
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \vueTest\houtai\src\page\layout.vue
- -->
 <style>
 .el-main {
   background-color: #f5f7f9;

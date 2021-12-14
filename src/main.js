@@ -5,7 +5,7 @@ import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-
+import 'font-awesome/css/font-awesome.css'
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(VueAxios, axios)
