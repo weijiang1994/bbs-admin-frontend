@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { login } from "@/api/auth";
+import { login, getUserInfo } from "@/api/auth";
 import { setToken } from "@/util/token";
 
 export default {
@@ -84,7 +84,7 @@ export default {
             .then((res) => {
               if (res.code === 200) {
                 this.showMessage(res.msg || "登录成功", "success");
-                setToken("Access-Token", res.access_token);
+                setToken("Access-Token", 'Bearer ' + res.access_token);
                 this.$router.push("/");
                 this.logining = false;
               }

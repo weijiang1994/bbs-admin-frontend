@@ -31,7 +31,7 @@ section {
     <el-aside width="auto" class="header-logo tap">
       <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
-          <el-avatar icon="el-icon-user-solid" class="headerLogo"></el-avatar>
+          <el-avatar src="http://127.0.0.1:5000/normal/image/avatars/admin_l.png"></el-avatar>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item
