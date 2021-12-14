@@ -87,6 +87,9 @@ export default {
               this.$router.push('/')
               this.logining = false
             }
+          }).catch(error=>{
+            this.showMessage(error.msg||'发生了错误', 'error')
+            this.logining = false
           });
         }
       });

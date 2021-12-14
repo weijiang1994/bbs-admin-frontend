@@ -49,6 +49,8 @@ service.interceptors.response.use(
             return res
         }
 
+    }, error => {
+        console.log(error);
     }
 )
 
