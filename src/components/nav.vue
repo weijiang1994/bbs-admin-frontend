@@ -9,6 +9,10 @@
 .el-aside{
   border-right: 1px solid #f5f1f1;
 }
+.mr{
+  margin-right: 4px;
+  font-size: 18px;
+}
 </style>
 
 <template>
@@ -22,23 +26,23 @@
           @close="handleClose"
         >
           <el-menu-item index="1" @click="goPage('home')">
-            <i class="el-icon-menu"></i>
+            <i class="fa fa-home fa-fw mr"></i>
             <span slot="title">后台中心</span>
           </el-menu-item>
 
           <el-menu-item index="2" @click="goPage('user')">
-            <i class="el-icon-document"></i>
+            <i class="fa fa-user fa-fw mr"></i>
             <span slot="title">用户管理</span>
           </el-menu-item>
 
           <el-submenu index="3">
             <template slot="title">
-              <i class="el-icon-location"></i>
+              <i class="fa fa-folder fa-fw mr"></i>
               <span>帖子管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="3-1">帖子审核</el-menu-item>
-              <el-menu-item index="3-2">帖子编辑</el-menu-item>
+              <el-menu-item index="3-1" @click="goPage('reviewPost')"><i class="fa fa-check fa-fw mr"></i>帖子审核</el-menu-item>
+              <el-menu-item index="3-2" @click="goPage('editPost')"><i class="fa fa-edit fa-fw mr"></i>帖子编辑</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>

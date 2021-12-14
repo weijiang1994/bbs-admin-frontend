@@ -2,12 +2,17 @@
 </style>
 <template>
   <div id="user">
-    <h1>用户管理</h1>
+    <bread></bread>
   </div>
 </template>
 
 <script>
+import Bread from '@/components/bread'
+
 export default {
-  name: 'User'
+  name: 'User',
+  components: {
+    Bread
+  }
 }
 </script>

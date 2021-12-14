@@ -41,7 +41,10 @@ const routes = [
     {
       path: 'user',
       name: 'User',
-      component: User
+      component: User,
+      meta:{
+        title: '用户管理'
+      }
     }
     ]
   }

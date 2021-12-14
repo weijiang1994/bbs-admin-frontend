@@ -2,12 +2,14 @@
 </style>
 <template>
   <div id="centre">
-    <h1>首页</h1>
+    <bread></bread>
   </div>
 </template>
 
 <script>
-export default{
-    name: 'centre'
-}
+import Bread from "@/components/bread";
+export default {
+  name: "centre",
+  components: {Bread},
+};
 </script>
