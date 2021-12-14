@@ -10,113 +10,119 @@ import Post from '@/views/post/post'
 import Edit from '@/views/post/edit'
 import Category from '@/views/post/category'
 import Topic from '@/views/post/topic'
-import { getToken } from "@/util/token";
-import { Message } from 'element-ui'
+import {getToken} from "@/util/token";
+import {Message} from 'element-ui'
+import NProgress from 'nprogress'//引入nprogress
+
 Vue.use(VueRouter)
 
 // 解决路由redirect报错(redirect报错不会影响正常功能但是看着就是很烦)
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location, onResolve, onReject) {
-  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
-  return originalPush.call(this, location).catch(err => err)
+    if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+    return originalPush.call(this, location).catch(err => err)
 }
 
 const routes = [
-  {
-    path: '/login',
-    name: 'Login',
-    component: Login,
-    meta: {
-      title: '管理员登录'
-    }
-  },
-  {
-    path: '/',
-    name: 'Home',
-    component: Layout,
-    redirect: 'index',
-    children: [
-      {
-        path: 'index',
-        name: 'Centre',
-        component: Centre,
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login,
         meta: {
-          title: '后台管理主页'
+            title: '管理员登录'
         }
-      },
-      {
-        path: 'user',
-        name: 'User',
-        component: User,
-        meta: {
-          title: '用户管理'
-        }
-      },
-      {
-        path: 'post',
-        name: 'Post',
-        component: Post,
+    },
+    {
+        path: '/',
+        name: 'Home',
+        component: Layout,
+        redirect: 'index',
         children: [
-          {
-            path: 'review',
-            name: 'Review',
-            component: Review,
-            meta: {
-              title: '帖子审核'
+            {
+                path: 'index',
+                name: 'Centre',
+                component: Centre,
+                meta: {
+                    title: '后台管理主页'
+                }
+            },
+            {
+                path: 'user',
+                name: 'User',
+                component: User,
+                meta: {
+                    title: '用户管理'
+                }
+            },
+            {
+                path: 'post',
+                name: 'Post',
+                component: Post,
+                children: [
+                    {
+                        path: 'review',
+                        name: 'Review',
+                        component: Review,
+                        meta: {
+                            title: '帖子审核'
+                        }
+                    },
+                    {
+                        path: 'edit',
+                        name: 'Edit',
+                        component: Edit,
+                        meta: {
+                            title: '帖子编辑'
+                        }
+                    },
+                    {
+                        path: 'category',
+                        name: 'Category',
+                        component: Category,
+                        meta: {
+                            title: '帖子类别'
+                        }
+                    },
+                    {
+                        path: 'topic',
+                        name: 'Topic',
+                        component: Topic,
+                        meta: {
+                            title: '帖子主题'
+                        }
+                    }
+                ]
             }
-          },
-          {
-            path: 'edit',
-            name: 'Edit',
-            component: Edit,
-            meta: {
-              title: '帖子编辑'
-            }
-          },
-          {
-            path: 'category',
-            name: 'Category',
-            component: Category,
-            meta:{
-              title: '帖子类别'
-            }
-          },
-          {
-            path: 'topic',
-            name: 'Topic',
-            component: Topic,
-            meta:{
-              title: '帖子主题'
-            }
-          }
         ]
-      }
-    ]
-  }
+    }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
 })
 
 
 // 导航守卫
 router.beforeEach((to, from, next) => {
-  let token = getToken('Access-Token')
-  if (to.meta.title) {
-    document.title = to.meta.title || '后台管理页面'
-  }
-  if (to.name !== 'Login' && !token) {
-    next({ name: 'Login' })
-    Message({
-      message: '请先登录！',
-      type: 'warning'
-    })
-  }
-  else next()
+    let token = getToken('Access-Token')
+    NProgress.start()
+    if (to.meta.title) {
+        document.title = to.meta.title || '后台管理页面'
+    }
+    if (to.name !== 'Login' && !token) {
+        next({name: 'Login'})
+        Message({
+            message: '请先登录！',
+            type: 'warning'
+        })
+    } else next()
 })
 
+
+router.afterEach(() => {
+    NProgress.done()
+})
 router.push('/')
 export default router
