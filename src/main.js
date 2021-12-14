@@ -1,12 +1,14 @@
 import Vue from 'vue'
-// import Button from 'ant-design-vue/lib/button'
-import {Button} from 'ant-design-vue'
-import 'ant-design-vue/dist/antd.css'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
 import router from './router'
-Vue.component(Button.name, Button)
-
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+import 'font-awesome/css/font-awesome.css'
 Vue.config.productionTip = false
+Vue.use(ElementUI);
+Vue.use(VueAxios, axios)
 
 new Vue({
   router,
