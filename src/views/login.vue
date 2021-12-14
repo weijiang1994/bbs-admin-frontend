@@ -76,21 +76,23 @@ export default {
     handleSubmit() {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
-          this.logining = true
+          this.logining = true;
           login({
             username: this.loginForm.username,
             password: this.loginForm.password,
-          }).then((res) => {
-            if (res.code === 200) {
-              this.showMessage(res.msg || "登录成功", "success");
-              setToken("Access-Token", res.access_token);
-              this.$router.push('/')
-              this.logining = false
-            }
-          }).catch(error=>{
-            this.showMessage(error.msg||'发生了错误', 'error')
-            this.logining = false
-          });
+          })
+            .then((res) => {
+              if (res.code === 200) {
+                this.showMessage(res.msg || "登录成功", "success");
+                setToken("Access-Token", res.access_token);
+                this.$router.push("/");
+                this.logining = false;
+              }
+            })
+            .catch(error =>{
+              this.logining = false;
+              console.log(error);
+            })
         }
       });
     },
@@ -109,6 +111,11 @@ export default {
 .login-container {
   width: 100%;
   height: 100%;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 }
 .login-page {
   -webkit-border-radius: 5px;
@@ -123,5 +130,9 @@ export default {
 label.el-checkbox.rememberme {
   margin: 0px 0px 15px;
   text-align: left;
+}
+
+h3{
+  margin-bottom: 5px;
 }
 </style>
