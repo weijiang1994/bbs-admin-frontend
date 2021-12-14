@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Router from 'vue-router'
 import Login from '@/views/login'
 import Layout from "@/views/layout";
 import Centre from "@/views/centre"
@@ -7,6 +8,13 @@ import User from '@/views/user'
 import { getToken } from "@/util/token";
 import { Message } from 'element-ui'
 Vue.use(VueRouter)
+
+// 解决路由redirect报错(redirect报错不会影响正常功能但是看着就是很烦)
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location, onResolve, onReject) {
+  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+  return originalPush.call(this, location).catch(err => err)
+}
 
 const routes = [
   {
@@ -61,5 +69,4 @@ router.beforeEach((to, from, next) => {
 })
 
 router.push('/')
-
 export default router

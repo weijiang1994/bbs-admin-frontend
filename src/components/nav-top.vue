@@ -29,21 +29,25 @@ section {
       <img class="logo" src="@/assets/imgs/logo.png" alt="Logo" />
     </el-aside>
     <el-aside width="auto" class="header-logo tap">
-      <el-dropdown>
+      <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
           <el-avatar icon="el-icon-user-solid" class="headerLogo"></el-avatar>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item><i class="fa fa-user fa-fw"></i>个人信息</el-dropdown-item>
-          <el-dropdown-item><i class="fa fa-sign-out fa-fw"></i>退出登录</el-dropdown-item>
+          <el-dropdown-item
+            ><i class="fa fa-user fa-fw"></i>个人信息</el-dropdown-item
+          >
+          <el-dropdown-item command="logout"
+            ><i class="fa fa-sign-out fa-fw"></i>退出登录</el-dropdown-item
+          >
         </el-dropdown-menu>
       </el-dropdown>
-      
     </el-aside>
   </el-container>
 </template>
 
 <script>
+import { removeToken } from "@/util/token";
 export default {
   data() {
     return {
@@ -53,6 +57,18 @@ export default {
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
+    },
+    handleCommand(command) {
+      console.log(command);
+      switch (command) {
+        case "logout":
+          removeToken("Access-Token");
+          location.reload();
+          break;
+
+        default:
+          break;
+      }
     },
   },
 };
