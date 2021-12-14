@@ -5,6 +5,11 @@ import Login from '@/views/login'
 import Layout from "@/views/layout";
 import Centre from "@/views/centre"
 import User from '@/views/user'
+import Review from '@/views/post/review'
+import Post from '@/views/post/post'
+import Edit from '@/views/post/edit'
+import Category from '@/views/post/category'
+import Topic from '@/views/post/topic'
 import { getToken } from "@/util/token";
 import { Message } from 'element-ui'
 Vue.use(VueRouter)
@@ -21,7 +26,7 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
-    meta:{
+    meta: {
       title: '管理员登录'
     }
   },
@@ -29,23 +34,63 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Layout,
-    redirect: '/index',
-    children: [{
-      path: '/index',
-      name: 'Centre',
-      component: Centre,
-      meta:{
-        title: '后台管理主页'
+    redirect: 'index',
+    children: [
+      {
+        path: 'index',
+        name: 'Centre',
+        component: Centre,
+        meta: {
+          title: '后台管理主页'
+        }
+      },
+      {
+        path: 'user',
+        name: 'User',
+        component: User,
+        meta: {
+          title: '用户管理'
+        }
+      },
+      {
+        path: 'post',
+        name: 'Post',
+        component: Post,
+        children: [
+          {
+            path: 'review',
+            name: 'Review',
+            component: Review,
+            meta: {
+              title: '帖子审核'
+            }
+          },
+          {
+            path: 'edit',
+            name: 'Edit',
+            component: Edit,
+            meta: {
+              title: '帖子编辑'
+            }
+          },
+          {
+            path: 'category',
+            name: 'Category',
+            component: Category,
+            meta:{
+              title: '帖子类别'
+            }
+          },
+          {
+            path: 'topic',
+            name: 'Topic',
+            component: Topic,
+            meta:{
+              title: '帖子主题'
+            }
+          }
+        ]
       }
-    },
-    {
-      path: 'user',
-      name: 'User',
-      component: User,
-      meta:{
-        title: '用户管理'
-      }
-    }
     ]
   }
 ]
@@ -56,6 +101,8 @@ const router = new VueRouter({
   routes
 })
 
+
+// 导航守卫
 router.beforeEach((to, from, next) => {
   let token = getToken('Access-Token')
   if (to.meta.title) {

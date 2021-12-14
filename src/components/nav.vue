@@ -1,15 +1,15 @@
 <style scoped>
-.el-row{
+.el-row {
   height: 100%;
 }
 
-.el-menu{
-  border-right:none;
+.el-menu {
+  border-right: none;
 }
-.el-aside{
+.el-aside {
   border-right: 1px solid #f5f1f1;
 }
-.mr{
+.mr {
   margin-right: 4px;
   font-size: 18px;
 }
@@ -41,8 +41,22 @@
               <span>帖子管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="3-1" @click="goPage('reviewPost')"><i class="fa fa-check fa-fw mr"></i>帖子审核</el-menu-item>
-              <el-menu-item index="3-2" @click="goPage('editPost')"><i class="fa fa-edit fa-fw mr"></i>帖子编辑</el-menu-item>
+              <el-menu-item
+                index="3-1"
+                @click="goSecondPage('/post', '/review')"
+                ><i class="fa fa-check fa-fw mr"></i>帖子审核</el-menu-item
+              >
+              <el-menu-item index="3-2" @click="goSecondPage('/post', '/edit')"
+                ><i class="fa fa-edit fa-fw mr"></i>帖子编辑</el-menu-item
+              >
+              <el-menu-item
+                index="3-3"
+                @click="goSecondPage('/post', '/category')"
+                ><i class="fa fa-bookmark fa-fw mr"></i>帖子类别</el-menu-item
+              >
+              <el-menu-item index="3-4" @click="goSecondPage('/post', '/topic')"
+                ><i class="fa fa-cube fa-fw mr"></i>帖子主题</el-menu-item
+              >
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -71,11 +85,14 @@ export default {
     //跳转到某个导航页
     goPage(link) {
       if (link === "home") {
-        $this.$router.push("/index").catch(error => error);
-      } else if ((link === "user")) {
-        $this.$router.push("/user").catch(error => error);
+        $this.$router.push("/index").catch((error) => error);
+      } else if (link === "user") {
+        $this.$router.push("/user").catch((error) => error);
       }
-    }
-  }
+    },
+    goSecondPage(parent, child) {
+      $this.$router.push(`${parent}${child}`).catch((error) => error);
+    },
+  },
 };
 </script>
