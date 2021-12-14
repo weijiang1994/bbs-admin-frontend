@@ -22,10 +22,10 @@ export default {
     getBreadList() {
       if (this.$route.matched.length >= 2) {
         let matched = this.$route.matched;
-        if (matched[1].name === "Centre") {
+        if (matched[matched.length - 1].name === "Centre") {
           return;
         }
-        this.breadList = { title: matched[1].meta.title };
+        this.breadList = { title: matched[matched.length - 1].meta.title };
       }
     },
   },
