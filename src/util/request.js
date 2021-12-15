@@ -1,6 +1,6 @@
 import axios from "axios";
 import { MessageBox, Message } from 'element-ui'
-import { getToken } from '@/util/token'
+import { getToken, removeToken } from '@/util/token'
 
 // 创建axios实例
 const service = axios.create({
@@ -42,6 +42,7 @@ service.interceptors.response.use(
                     type: 'warning'
                 }).then(() => {
                     // TODO 重置状态
+                    removeToken('Access-Token')
                     location.reload()
                 })
             }

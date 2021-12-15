@@ -120,9 +120,11 @@ router.beforeEach((to, from, next) => {
     } else next()
 })
 
-
+    
 router.afterEach(() => {
     NProgress.done()
 })
+
 router.push('/')
+
 export default router

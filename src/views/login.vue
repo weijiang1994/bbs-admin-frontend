@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { login, getUserInfo } from "@/api/auth";
+import { login } from "@/api/auth";
 import { setToken } from "@/util/token";
 
 export default {
