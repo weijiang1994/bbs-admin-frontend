@@ -3,6 +3,7 @@
 <template>
   <div id="user">
     <bread></bread>
+    <search></search>
     <el-table
       v-loading="loading"
       :data="userList"
@@ -107,11 +108,13 @@
 import Bread from "@/components/bread";
 import Pagination from "@/components/pagination";
 import { getUserList, banUser, unbanUser } from "@/api/user";
+import Search from "./components/search"
 export default {
   name: "User",
   components: {
     Bread,
     Pagination,
+    Search
   },
   data() {
     return {
