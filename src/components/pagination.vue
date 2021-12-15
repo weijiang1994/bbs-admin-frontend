@@ -2,13 +2,14 @@
   <div class="block">
     <el-pagination
       background
+      :hide-on-single-page="value"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page="currentPage"
-      :page-sizes="[100, 200, 300, 400]"
+      :page-sizes="pageSizes"
       :page-size="pageSize"
       layout="total, sizes, prev, pager, next, jumper"
-      :total="400"
+      :total="total"
     >
     </el-pagination>
   </div>
@@ -17,17 +18,20 @@
 <script>
 export default {
   methods: {
+    // 每页条数改变
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
     },
+    // 当前页改变
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
     },
   },
   data() {
     return {
       currentPage: 1,
       pageSize: 20,
+      pageSizes: [20, 50, 100],
+      total: 0,
+      value: true,
     };
   },
 };
