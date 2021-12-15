@@ -76,22 +76,22 @@ export default {
   },
   methods: {
     handleOpen(key, keyPath) {
-      console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
-      console.log(key, keyPath);
     },
 
-    //跳转到某个导航页
+    // 跳转到顶级路由页
     goPage(link) {
       if (link === "home") {
-        $this.$router.push("/index").catch((error) => error);
+        this.$router.push("/index").catch((error) => error);
       } else if (link === "user") {
-        $this.$router.push("/user").catch((error) => error);
+        this.$router.push("/user").catch((error) => error);
       }
     },
+
+    // 跳转到二级路由页
     goSecondPage(parent, child) {
-      $this.$router.push(`${parent}${child}`).catch((error) => error);
+      this.$router.push(`${parent}${child}`).catch((error) => error);
     },
   },
 };

@@ -4,7 +4,7 @@ import Router from 'vue-router'
 import Login from '@/views/login'
 import Layout from "@/views/layout";
 import Centre from "@/views/centre"
-import User from '@/views/user'
+import User from '@/views/user/user'
 import Review from '@/views/post/review'
 import Post from '@/views/post/post'
 import Edit from '@/views/post/edit'
@@ -120,9 +120,11 @@ router.beforeEach((to, from, next) => {
     } else next()
 })
 
-
+    
 router.afterEach(() => {
     NProgress.done()
 })
+
 router.push('/')
+
 export default router
