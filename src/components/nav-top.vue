@@ -7,21 +7,32 @@
       <div class="mr-2">
         <el-tooltip
           effect="dark"
-          content="跳转到论坛前台页面！"
+          content="论坛前台页面"
           placement="bottom"
         >
           <el-button
             size="mini"
-            icon="el-icon-s-home"
             circle
             @click="goFrontend"
-          ></el-button>
+          ><i class="fa fa-home"></i></el-button>
         </el-tooltip>
       </div>
       <div class="mr-2">
+        <el-tooltip effect="dark" content="后台主页面" placement="bottom">
+          <el-button size="mini" circle><i class="fa fa-tachometer"></i></el-button>
+        </el-tooltip>
+      </div>
+
+      <div class="mr-2">
+        <el-tooltip effect="dark" content="处理用户举报" placement="bottom">
+          <el-button size="mini" circle><i class="fa fa-coffee"></i></el-button>
+        </el-tooltip>
+      </div>
+
+      <div class="mr-2">
         <el-tooltip effect="dark" content="查看消息" placement="top">
           <el-badge is-dot class="item">
-            <el-button size="mini" icon="el-icon-bell" circle></el-button>
+            <el-button size="mini" circle><i class="fa fa-bell-o"></i></el-button>
           </el-badge>
         </el-tooltip>
       </div>
