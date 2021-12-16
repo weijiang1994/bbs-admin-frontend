@@ -3,7 +3,7 @@
 <template>
   <div id="user">
     <bread></bread>
-    <search></search>
+    <search @search="searchUser" @reset="resetPage"></search>
     <el-table
       v-loading="loading"
       :data="userList"
@@ -107,7 +107,7 @@
 <script>
 import Bread from "@/components/bread";
 import Pagination from "@/components/pagination";
-import { getUserList, banUser, unbanUser } from "@/api/user";
+import { getUserList, banUser, unbanUser, queryUser } from "@/api/user";
 import Search from "./components/search"
 export default {
   name: "User",
@@ -194,6 +194,18 @@ export default {
         this.loading = false;
       });
     },
+    searchUser(datas){
+      queryUser({
+        keyword: datas[0],
+        category: datas[1]
+      })
+      .then((res)=>{
+        this.userList = res.data
+      })
+    },
+    resetPage(){
+      this.getUser()
+    }
   },
   created() {
     this.getUser();

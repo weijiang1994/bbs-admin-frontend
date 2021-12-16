@@ -28,4 +28,12 @@ function unbanUser(params){
 }
 
 
-export { getUserList, banUser, unbanUser }
+function queryUser(params){
+    return request({
+        url: '/user/query',
+        method: 'post',
+        data: params
+    })
+}
+
+export { getUserList, banUser, unbanUser, queryUser }
