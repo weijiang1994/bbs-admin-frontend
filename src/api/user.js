@@ -45,4 +45,13 @@ function queryUser(params){
     })
 }
 
-export { getUserList, banUser, unbanUser, queryUser, batchBanUser }
+
+function editUser(params){
+    return request({
+        url: '/user/edit',
+        method: 'post',
+        data: params
+    })
+}
+
+export { getUserList, banUser, unbanUser, queryUser, batchBanUser, editUser }

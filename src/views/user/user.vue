@@ -109,6 +109,13 @@
       @sizeChange="changePageSize"
       :disable="paginationData.disable"
     ></pagination>
+    <edit-user-dialog
+      v-if="editDialog.show"
+      :showEdit="editDialog.show"
+      :dialogRow="editDialog.dialogRow"
+      @closeDialog="closeUserEdit"
+      @editFinish="userEditFinish"
+    ></edit-user-dialog>
   </div>
 </template>
 
@@ -123,12 +130,15 @@ import {
   batchBanUser,
 } from "@/api/user";
 import Search from "./components/search";
+import EditUserDialog from "./components/edit";
+
 export default {
   name: "User",
   components: {
     Bread,
     Pagination,
     Search,
+    EditUserDialog,
   },
   data() {
     return {
@@ -137,15 +147,25 @@ export default {
       paginationData: {
         page: 1,
         limit: 20,
-        disable: false
+        disable: false,
       },
       pageTotal: 0,
       selected: false,
       selectedRow: [],
+      editDialog: {
+        show: false,
+        dialogRow: {}
+      },
     };
   },
   methods: {
-    onEditUser(row) {},
+    closeUserEdit() {
+      this.editDialog.show = false;
+    },
+    onEditUser(row) {
+      this.editDialog.show = true;
+      this.editDialog.dialogRow = {...row}
+    },
 
     // 封禁用户
     onBaned(row) {
@@ -230,13 +250,13 @@ export default {
         category: datas[1],
       }).then((res) => {
         this.userList = res.data;
-        this.paginationData.disable = true
+        this.paginationData.disable = true;
       });
     },
     // 重置页面
     resetPage() {
       this.getUser();
-      this.paginationData.disable = false
+      this.paginationData.disable = false;
     },
     // 批量封禁用户
     banUsers() {
@@ -255,6 +275,10 @@ export default {
         })
         .catch(() => {});
     },
+    userEditFinish(datas){
+      this.showNotify(datas.msg, '成功', 'success')
+      this.getUser()
+    }
   },
   created() {
     this.getUser();
