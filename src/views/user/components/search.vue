@@ -1,5 +1,8 @@
 <template>
   <div class="search">
+    <div class="operator">
+      <el-button type="danger" size="small" :disabled="ban" @click="batchBan">批量封禁</el-button>
+    </div>
     <el-form
       :inline="true"
       :model="searchForm"
@@ -55,6 +58,9 @@
 </template>
 <script>
 export default {
+  props: {
+    ban: { type: Boolean, default: true },
+  },
   data() {
     return {
       searchForm: {
@@ -78,13 +84,19 @@ export default {
     search(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-            this.$emit('search', [this.searchForm.keyword, this.searchForm.category])
+          this.$emit("search", [
+            this.searchForm.keyword,
+            this.searchForm.category,
+          ]);
         }
       });
     },
-    reset(formName){
-        this.$refs[formName].resetFields();
-        this.$emit('reset')
+    reset(formName) {
+      this.$refs[formName].resetFields();
+      this.$emit("reset");
+    },
+    batchBan(){
+        this.$emit('batchBanUser')
     }
   },
 };
@@ -94,5 +106,9 @@ export default {
 .search {
   display: flex;
   justify-content: flex-end;
+}
+.operator {
+  flex-grow: 1;
+  padding-top: 3px;
 }
 </style>
