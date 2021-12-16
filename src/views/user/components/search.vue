@@ -1,7 +1,9 @@
 <template>
   <div class="search">
     <div class="operator">
-      <el-button type="danger" size="small" :disabled="ban" @click="batchBan">批量封禁</el-button>
+      <el-button type="danger" size="small" :disabled="ban" @click="batchBan"
+        >批量封禁</el-button
+      >
     </div>
     <el-form
       :inline="true"
@@ -39,19 +41,22 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button
-          type="primary"
-          @click="search('searchForm')"
-          size="small"
-          icon="el-icon-search"
-        ></el-button>
-
-        <el-button
-          type="success"
-          @click="reset('searchForm')"
-          size="small"
-          icon="el-icon-refresh"
-        ></el-button>
+        <el-tooltip effect="dark" content="搜索用户" placement="bottom">
+          <el-button
+            type="primary"
+            @click="search('searchForm')"
+            size="small"
+            icon="el-icon-search"
+          ></el-button>
+        </el-tooltip>
+        <el-tooltip effect="dark" content="重置搜索" placement="bottom">
+          <el-button
+            type="success"
+            @click="reset('searchForm')"
+            size="small"
+            icon="el-icon-refresh"
+          ></el-button>
+        </el-tooltip>
       </el-form-item>
     </el-form>
   </div>
@@ -95,9 +100,9 @@ export default {
       this.$refs[formName].resetFields();
       this.$emit("reset");
     },
-    batchBan(){
-        this.$emit('batchBanUser')
-    }
+    batchBan() {
+      this.$emit("batchBanUser");
+    },
   },
 };
 </script>
