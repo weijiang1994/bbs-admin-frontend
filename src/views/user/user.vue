@@ -3,7 +3,12 @@
 <template>
   <div id="user">
     <bread></bread>
-    <search></search>
+    <search
+      @search="searchUser"
+      @reset="resetPage"
+      :ban="!selected"
+      @batchBanUser="banUsers"
+    ></search>
     <el-table
       v-loading="loading"
       :data="userList"
@@ -48,7 +53,9 @@
         <template slot-scope="scope">
           <el-tag
             :type="scope.row.status === 1 ? 'success' : 'danger'"
-            disable-transitions effect="dark" size="small"
+            disable-transitions
+            effect="dark"
+            size="small"
           >
             <p v-if="scope.row.status === 1">正常</p>
             <p v-else>封禁</p>
@@ -100,21 +107,38 @@
       :total="pageTotal"
       @pageChange="changeCurrentPage"
       @sizeChange="changePageSize"
+      :disable="paginationData.disable"
     ></pagination>
+    <edit-user-dialog
+      v-if="editDialog.show"
+      :showEdit="editDialog.show"
+      :dialogRow="editDialog.dialogRow"
+      @closeDialog="closeUserEdit"
+      @editFinish="userEditFinish"
+    ></edit-user-dialog>
   </div>
 </template>
 
 <script>
 import Bread from "@/components/bread";
 import Pagination from "@/components/pagination";
-import { getUserList, banUser, unbanUser } from "@/api/user";
-import Search from "./components/search"
+import {
+  getUserList,
+  banUser,
+  unbanUser,
+  queryUser,
+  batchBanUser,
+} from "@/api/user";
+import Search from "./components/search";
+import EditUserDialog from "./components/edit";
+
 export default {
   name: "User",
   components: {
     Bread,
     Pagination,
-    Search
+    Search,
+    EditUserDialog,
   },
   data() {
     return {
@@ -123,13 +147,24 @@ export default {
       paginationData: {
         page: 1,
         limit: 20,
+        disable: false,
       },
       pageTotal: 0,
+      selected: false,
+      selectedRow: [],
+      editDialog: {
+        show: false,
+        dialogRow: {}
+      },
     };
   },
   methods: {
+    closeUserEdit() {
+      this.editDialog.show = false;
+    },
     onEditUser(row) {
-      console.log(row);
+      this.editDialog.show = true;
+      this.editDialog.dialogRow = {...row}
     },
 
     // 封禁用户
@@ -157,32 +192,46 @@ export default {
           .catch(() => {});
       });
     },
+    // 显示确认提示框
     showConfirm(msg, title, type) {
       return this.$confirm(msg, title, {
         type,
       });
     },
+    // 显示通知框
     showNotify(msg, title, type) {
       this.$notify({
         title: title,
         message: msg,
         type: type,
-        duration: 2 * 1000
+        duration: 2 * 1000,
       });
     },
+    // 过滤角色
     filterRole(value, row) {
       return row.role === value;
     },
+    // 换页
     changeCurrentPage(page) {
       this.paginationData.page = page;
       this.getUser();
     },
+    // 切换每页数量
     changePageSize(size) {
       this.paginationData.limit = size;
       this.getUser();
     },
     // 选中行数时触发
-    handleSelectionChange(val) {},
+    handleSelectionChange(val) {
+      if (val.length) this.selected = true;
+      else this.selected = false;
+      let usernames = [];
+      val.forEach((element) => {
+        usernames.push(element.username);
+      });
+      this.selectedRow = usernames;
+    },
+    // 后端接口获取用户列表
     getUser() {
       this.loading = true;
       getUserList({
@@ -194,6 +243,42 @@ export default {
         this.loading = false;
       });
     },
+    // 搜索用户
+    searchUser(datas) {
+      queryUser({
+        keyword: datas[0],
+        category: datas[1],
+      }).then((res) => {
+        this.userList = res.data;
+        this.paginationData.disable = true;
+      });
+    },
+    // 重置页面
+    resetPage() {
+      this.getUser();
+      this.paginationData.disable = false;
+    },
+    // 批量封禁用户
+    banUsers() {
+      this.showConfirm("确定批量封禁/解封这些用户吗?", "提示", "warning")
+        .then(() => {
+          if (this.selectedRow.length <= 0) {
+            this.showNotify("请先选择需要封禁/解封的数据！", "提示", "warning");
+            return;
+          }
+          batchBanUser({
+            users: this.selectedRow,
+          }).then((res) => {
+            this.showNotify(res.msg, "成功", "success");
+            this.getUser();
+          });
+        })
+        .catch(() => {});
+    },
+    userEditFinish(datas){
+      this.showNotify(datas.msg, '成功', 'success')
+      this.getUser()
+    }
   },
   created() {
     this.getUser();

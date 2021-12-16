@@ -19,6 +19,15 @@ function banUser(params){
 }
 
 
+function batchBanUser(params){
+    return request({
+        url: '/user/batch-ban',
+        method: 'post',
+        data: params
+    })
+}
+
+
 function unbanUser(params){
     return request({
         url: '/user/unban',
@@ -28,4 +37,21 @@ function unbanUser(params){
 }
 
 
-export { getUserList, banUser, unbanUser }
+function queryUser(params){
+    return request({
+        url: '/user/query',
+        method: 'post',
+        data: params
+    })
+}
+
+
+function editUser(params){
+    return request({
+        url: '/user/edit',
+        method: 'post',
+        data: params
+    })
+}
+
+export { getUserList, banUser, unbanUser, queryUser, batchBanUser, editUser }

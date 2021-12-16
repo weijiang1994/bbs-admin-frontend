@@ -4,6 +4,38 @@
       <img class="logo" src="@/assets/imgs/logo.png" alt="Logo" />
     </el-aside>
     <el-aside width="auto" class="header-logo tap">
+      <div class="mr-2">
+        <el-tooltip
+          effect="dark"
+          content="论坛前台页面"
+          placement="bottom"
+        >
+          <el-button
+            size="mini"
+            circle
+            @click="goFrontend"
+          ><i class="fa fa-home"></i></el-button>
+        </el-tooltip>
+      </div>
+      <div class="mr-2">
+        <el-tooltip effect="dark" content="后台主页面" placement="bottom">
+          <el-button size="mini" circle><i class="fa fa-tachometer"></i></el-button>
+        </el-tooltip>
+      </div>
+
+      <div class="mr-2">
+        <el-tooltip effect="dark" content="处理用户举报" placement="bottom">
+          <el-button size="mini" circle><i class="fa fa-coffee"></i></el-button>
+        </el-tooltip>
+      </div>
+
+      <div class="mr-2">
+        <el-tooltip effect="dark" content="查看消息" placement="top">
+          <el-badge is-dot class="item">
+            <el-button size="mini" circle><i class="fa fa-bell-o"></i></el-button>
+          </el-badge>
+        </el-tooltip>
+      </div>
       <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
           <el-avatar :src="avatar"></el-avatar>
@@ -29,10 +61,13 @@ export default {
     return {
       activeIndex: "1",
       avatar: "",
-      userId: undefined
+      userId: undefined,
     };
   },
   methods: {
+    goFrontend() {
+      window.open("https://bbs.2dogz.cn");
+    },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
@@ -50,8 +85,8 @@ export default {
   },
   created() {
     getUserInfo({}).then((res) => {
-      this.avatar = res.avatar
-      this.userId = res.id
+      this.avatar = res.avatar;
+      this.userId = res.id;
     });
   },
 };
@@ -79,5 +114,9 @@ section {
 .headerLogo,
 .logo {
   cursor: pointer;
+}
+
+.mr-2 {
+  margin-right: 20px;
 }
 </style>

@@ -16,7 +16,7 @@
 </style>
 
 <template>
-  <el-aside width="200px">
+  <el-aside width="220px" style="position: flex">
     <el-row class="tac">
       <el-col>
         <el-menu
@@ -75,10 +75,8 @@ export default {
     $this = this;
   },
   methods: {
-    handleOpen(key, keyPath) {
-    },
-    handleClose(key, keyPath) {
-    },
+    handleOpen(key, keyPath) {},
+    handleClose(key, keyPath) {},
 
     // 跳转到顶级路由页
     goPage(link) {
