@@ -107,6 +107,7 @@
       :total="pageTotal"
       @pageChange="changeCurrentPage"
       @sizeChange="changePageSize"
+      :disable="paginationData.disable"
     ></pagination>
   </div>
 </template>
@@ -136,6 +137,7 @@ export default {
       paginationData: {
         page: 1,
         limit: 20,
+        disable: false
       },
       pageTotal: 0,
       selected: false,
@@ -228,11 +230,13 @@ export default {
         category: datas[1],
       }).then((res) => {
         this.userList = res.data;
+        this.paginationData.disable = true
       });
     },
     // 重置页面
     resetPage() {
       this.getUser();
+      this.paginationData.disable = false
     },
     // 批量封禁用户
     banUsers() {

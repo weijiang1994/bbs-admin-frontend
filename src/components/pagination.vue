@@ -10,6 +10,7 @@
       :page-size="pageSize"
       layout="total, sizes, prev, pager, next, jumper"
       :total="total"
+      :disabled="disable"
     >
     </el-pagination>
   </div>
@@ -37,7 +38,8 @@ export default {
   },
   // 获取父组件传递过来的total
   props:{
-    total: Number
+    total: Number,
+    disable:{type: Boolean, default: false}
   }
 };
 </script>
