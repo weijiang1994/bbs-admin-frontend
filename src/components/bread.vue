@@ -19,10 +19,12 @@
 
 <script>
 export default {
+  props:{
+    iconName: {type: String, default: 'el-icon-s-unfold'}
+  },
   data() {
     return {
       breadList: [],
-      iconName: "el-icon-s-unfold",
       isCollapse: false,
     };
   },

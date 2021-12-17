@@ -1,25 +1,12 @@
-<style scoped>
-.el-row {
-  height: 100%;
-}
-
-.el-menu {
-  border-right: none;
-}
-.el-aside {
-  border-right: 1px solid #f5f1f1;
-}
-.mr {
-  margin-right: 4px;
-  font-size: 18px;
-}
-</style>
-
 <template>
-  <el-aside width="220px" style="position: flex">
+  <el-aside :width="menuWidth">
     <el-row class="tac">
       <el-col>
+
         <el-menu
+                :unique-opened="true"
+          :collapse="isCollapse"
+          :collapse-transition = "false"
           default-active="1"
           class="el-menu-vertical-demo"
           @open="handleOpen"
@@ -60,19 +47,22 @@
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
+
       </el-col>
     </el-row>
   </el-aside>
 </template>
 
 <script>
-var $this = {};
 export default {
+  props:{
+    isCollapse: {type: Boolean, default: false},
+    menuWidth: {type: String, default: '220px'}
+  },
   data() {
     return {};
   },
   beforeCreate() {
-    $this = this;
   },
   methods: {
     handleOpen(key, keyPath) {},
@@ -94,3 +84,27 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .el-row {
+    height: 100%;
+  }
+
+  .el-menu {
+    border-right: none;
+  }
+
+  .el-aside {
+    border-right: 1px solid #f5f1f1;
+    transition: width 0.15s;
+    -webkit-transition: width 0.15s;
+    -moz-transition: width 0.15s;
+    -webkit-transition: width 0.15s;
+    -o-transition: width 0.15s;
+  }
+
+  .mr {
+    margin-right: 4px;
+    font-size: 18px;
+  }
+</style>

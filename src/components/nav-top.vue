@@ -135,6 +135,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 section {
@@ -146,8 +147,9 @@ section {
 }
 
 .logo {
-  width: 200px;
-  height: 70px;
+  padding-left: 15px;
+  width: 150px;
+  height: 50px;
 }
 
 .headerLogo,

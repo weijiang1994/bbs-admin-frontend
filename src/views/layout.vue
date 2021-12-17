@@ -1,21 +1,4 @@
-<style>
-.el-main {
-  background-color: #f5f7f9;
-}
-
-.el-header,
-.el-footer {
-  background-color: white;
-  box-sizing: border-box;
-  border-bottom: 1px solid #f5f1f1;
-}
-
-.el-container {
-  height: 100%;
-}
-</style>
-
- <template>
+<template>
   <el-container>
     <!-- header部分 -->
     <el-header>
@@ -23,10 +6,11 @@
     </el-header>
     <el-container>
        <!-- aside部分 -->
-      <leftNav></leftNav>
+      <leftNav :isCollapse="leftMenu.collapse"
+               :menuWidth="leftMenu.width"></leftNav>
       
       <el-main>
-        <bread></bread>
+        <bread @collapse-left="collapseLeft" :iconName="breadIcon"></bread>
          <!-- main部分 -->
         <router-view />
       </el-main>
@@ -46,11 +30,43 @@ export default {
     Bread
   },
   data() {
-    return {};
+    return {
+        leftMenu:{
+            collapse: false,
+            width: '220px'
+        },
+        breadIcon: 'el-icon-s-unfold'
+    };
   },
-  methods: {}
+  methods: {
+      collapseLeft(toggle){
+          this.leftMenu.collapse = toggle
+          if (toggle) {
+              this.leftMenu.width = '65px'
+              this.breadIcon = 'el-icon-s-fold'
+          }
+          else {
+              this.leftMenu.width = '220px'
+              this.breadIcon = 'el-icon-s-unfold'
+          }
+      }
+  }
 };
 </script>
 
+ <style>
+     .el-main {
+         background-color: #f5f7f9;
+     }
 
+     .el-header,
+     .el-footer {
+         background-color: white;
+         box-sizing: border-box;
+         border-bottom: 1px solid #f5f1f1;
+     }
 
+     .el-container {
+         height: 100%;
+     }
+ </style>
