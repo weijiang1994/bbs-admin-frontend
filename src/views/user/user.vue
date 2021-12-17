@@ -30,7 +30,6 @@
         prop="email"
         label="邮箱"
         show-overflow-tooltip
-        width="240"
       >
       </el-table-column>
       <el-table-column prop="gender" label="性别" sortable width="100">
@@ -65,7 +64,6 @@
         prop="website"
         label="个人网站"
         show-overflow-tooltip
-        width="200"
       ></el-table-column>
       <el-table-column
         prop="join"
@@ -119,7 +117,6 @@
 </template>
 
 <script>
-import Bread from "@/components/bread";
 import Pagination from "@/components/pagination";
 import {
   getUserList,
