@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-aside width="auto" class="header-logo tap">
-      <img class="logo" src="@/assets/imgs/logo.png" alt="Logo" />
+      <img class="logo" src="@/assets/imgs/logo6.png" alt="Logo" />
     </el-aside>
     <el-aside width="auto" class="header-logo tap">
       <div class="mr-2">
@@ -147,6 +147,7 @@ section {
 
 .logo {
   width: 200px;
+  height: 70px;
 }
 
 .headerLogo,
