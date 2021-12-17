@@ -37,7 +37,7 @@
 
           <el-submenu index="3">
             <template slot="title">
-              <i class="fa fa-folder fa-fw mr"></i>
+              <i class="fa fa-paper-plane fa-fw mr"></i>
               <span>帖子管理</span>
             </template>
             <el-menu-item-group>
@@ -52,10 +52,10 @@
               <el-menu-item
                 index="3-3"
                 @click="goSecondPage('/post', '/category')"
-                ><i class="fa fa-bookmark fa-fw mr"></i>帖子类别</el-menu-item
+                ><i class="fa fa-tag fa-fw mr"></i>帖子类别</el-menu-item
               >
               <el-menu-item index="3-4" @click="goSecondPage('/post', '/topic')"
-                ><i class="fa fa-cube fa-fw mr"></i>帖子主题</el-menu-item
+                ><i class="fa fa-bookmark fa-fw mr"></i>帖子主题</el-menu-item
               >
             </el-menu-item-group>
           </el-submenu>

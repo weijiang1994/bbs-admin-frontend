@@ -24,7 +24,9 @@
     <el-container>
        <!-- aside部分 -->
       <leftNav></leftNav>
+      
       <el-main>
+        <bread></bread>
          <!-- main部分 -->
         <router-view />
       </el-main>
@@ -36,10 +38,12 @@
  <script>
 import navtop from "@/components/nav-top.vue";
 import leftNav from "@/components/nav.vue";
+import Bread from '../components/bread.vue';
 export default {
   components: {
     navtop,
-    leftNav
+    leftNav,
+    Bread
   },
   data() {
     return {};

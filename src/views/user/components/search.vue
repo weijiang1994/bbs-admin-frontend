@@ -101,7 +101,7 @@ export default {
       this.$emit("reset");
     },
     batchBan() {
-      this.$emit("batchBanUser");
+      this.$emit("batch-ban-user");
     },
   },
 };
