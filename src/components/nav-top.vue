@@ -69,7 +69,8 @@ export default {
       this.$router.push('/index')
     },
     goFrontend() {
-      window.open("https://bbs.2dogz.cn");
+      console.log(process.env);
+      window.open(process.env.VUE_APP_FRONTEND_HOME);
     },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
