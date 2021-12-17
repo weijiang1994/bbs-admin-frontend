@@ -21,11 +21,11 @@ export default {
   methods: {
     // 每页条数改变
     handleSizeChange(size) {
-      this.$emit('sizeChange', size)
+      this.$emit('size-change', size)
     },
     // 当前页改变
     handleCurrentChange(page) {
-      this.$emit('pageChange', page)
+      this.$emit('page-change', page)
     },
   },
   data() {

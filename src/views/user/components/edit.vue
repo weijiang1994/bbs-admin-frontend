@@ -110,7 +110,7 @@ export default {
   },
   methods: {
     closeDialog() {
-      this.$emit("closeDialog");
+      this.$emit("close-dialog");
     },
     onSubmit(){
         editUser({
@@ -118,7 +118,7 @@ export default {
         })
         .then((res)=>{
             this.isShow = false
-            this.$emit('editFinish', res)
+            this.$emit('edit-finish', res)
         })
     }
 

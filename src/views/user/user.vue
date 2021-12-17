@@ -7,7 +7,7 @@
       @search="searchUser"
       @reset="resetPage"
       :ban="!selected"
-      @batchBanUser="banUsers"
+      @batch-ban-user="banUsers"
     ></search>
     <el-table
       v-loading="loading"
@@ -105,16 +105,16 @@
     </el-table>
     <pagination
       :total="pageTotal"
-      @pageChange="changeCurrentPage"
-      @sizeChange="changePageSize"
+      @page-change="changeCurrentPage"
+      @size-change="changePageSize"
       :disable="paginationData.disable"
     ></pagination>
     <edit-user-dialog
       v-if="editDialog.show"
       :showEdit="editDialog.show"
       :dialogRow="editDialog.dialogRow"
-      @closeDialog="closeUserEdit"
-      @editFinish="userEditFinish"
+      @close-dialog="closeUserEdit"
+      @edit-finish="userEditFinish"
     ></edit-user-dialog>
   </div>
 </template>
