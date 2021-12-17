@@ -19,7 +19,7 @@
       </div>
       <div class="mr-2">
         <el-tooltip effect="dark" content="后台主页面" placement="bottom">
-          <el-button size="mini" circle><i class="fa fa-tachometer"></i></el-button>
+          <el-button @click="goDashborad" size="mini" circle><i class="fa fa-tachometer"></i></el-button>
         </el-tooltip>
       </div>
 
@@ -65,6 +65,9 @@ export default {
     };
   },
   methods: {
+    goDashborad(){
+      this.$router.push('/index')
+    },
     goFrontend() {
       window.open("https://bbs.2dogz.cn");
     },
