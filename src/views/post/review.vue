@@ -1,6 +1,5 @@
 <template>
   <div>
-    <bread></bread>
     <div style="margin-bottom: 10px">
       <el-button
         type="success"
@@ -91,7 +90,6 @@
 </template>
 
 <script>
-import Bread from "@/components/bread";
 import Pagination from "@/components/pagination";
 import { reviewPostList, reviewBatchPass, reviewBatchFail } from "@/api/post";
 import { showMessage, showNotice, showConfirm } from "@/util/notice";
@@ -111,7 +109,7 @@ export default {
     };
   },
   name: "review",
-  components: { Bread, Pagination },
+  components: { Pagination },
   created() {
     this.getPostList();
   },

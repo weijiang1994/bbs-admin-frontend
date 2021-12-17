@@ -2,7 +2,6 @@
 </style>
 <template>
   <div id="user">
-    <bread></bread>
     <search
       @search="searchUser"
       @reset="resetPage"
@@ -135,7 +134,6 @@ import EditUserDialog from "./components/edit";
 export default {
   name: "User",
   components: {
-    Bread,
     Pagination,
     Search,
     EditUserDialog,

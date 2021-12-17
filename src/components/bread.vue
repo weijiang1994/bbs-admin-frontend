@@ -2,7 +2,7 @@
   <div class="mb">
     <el-button
       :icon="iconName"
-      @click="collaspLefeMenu()"
+      @click="collapseLeftMenu"
       size="mini"
     ></el-button>
     <div class="breadcrumb-div">
@@ -23,22 +23,17 @@ export default {
     return {
       breadList: [],
       iconName: "el-icon-s-unfold",
-      isCollaspe: false,
+      isCollapse: false,
     };
   },
   methods: {
     getBreadList() {
-      if (this.$route.matched.length >= 2) {
-        let matched = this.$route.matched;
-        if (matched[matched.length - 1].name === "Centre") {
-          return;
-        }
-        this.breadList = { title: matched[matched.length - 1].meta.title };
-      }
+      if (this.$route.name === 'Centre') this.breadList = {}
+      else this.breadList = {title: this.$route.meta.title}
     },
-    collaspLefeMenu() {
-      this.isCollaspe = !this.isCollaspe;
-      this.$emit("collapse-left", this.isCollaspe);
+    collapseLeftMenu() {
+      this.isCollapse = !this.isCollapse;
+      this.$emit("collapse-left", this.isCollapse);
     },
   },
   created() {
@@ -46,7 +41,6 @@ export default {
   },
   watch:{
     $route(){
-      console.log(this.$route);
       this.getBreadList()
     }
   }
