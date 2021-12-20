@@ -8,10 +8,11 @@ import User from '@/views/user/user'
 import Review from '@/views/post/review'
 import Post from '@/views/post/post'
 import Edit from '@/views/post/edit'
+import PostContent from '@/views/post/content'
 import Category from '@/views/post/category'
 import Topic from '@/views/post/topic'
-import {getToken} from "@/util/token";
-import {Message} from 'element-ui'
+import { getToken } from "@/util/token";
+import { Message } from 'element-ui'
 import NProgress from 'nprogress'//引入nprogress
 
 Vue.use(VueRouter)
@@ -68,6 +69,14 @@ const routes = [
                         }
                     },
                     {
+                        path: 'detail/:id',
+                        name: 'Content',
+                        component: PostContent,
+                        meta: {
+                            title: '帖子详情'
+                        }
+                    },
+                    {
                         path: 'edit',
                         name: 'Edit',
                         component: Edit,
@@ -112,7 +121,7 @@ router.beforeEach((to, from, next) => {
         document.title = to.meta.title || '后台管理页面'
     }
     if (to.name !== 'Login' && !token) {
-        next({name: 'Login'})
+        next({ name: 'Login' })
         Message({
             message: '请先登录！',
             type: 'warning'
@@ -120,7 +129,7 @@ router.beforeEach((to, from, next) => {
     } else next()
 })
 
-    
+
 router.afterEach(() => {
     NProgress.done()
 })

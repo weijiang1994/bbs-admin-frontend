@@ -75,7 +75,7 @@
             type="primary"
             icon="edit"
             size="mini"
-            @click="onEditUser(scope.row)"
+            @click="onPostDetail(scope.row)"
             >审核</el-button
           >
         </template>
@@ -184,6 +184,9 @@ export default {
             .catch(() => {});
         })
         .catch(() => {});
+    },
+    onPostDetail(row){
+      this.$router.push(`/post/detail/${row.id}`)
     },
   },
 };
