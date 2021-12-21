@@ -81,7 +81,21 @@ const routes = [
                         name: 'Edit',
                         component: Edit,
                         meta: {
-                            title: '帖子编辑'
+                            title: '帖子编辑',
+                            searchData: [
+                                { label: '标题', value: 'title' },
+                                { label: '作者', value: 'author' }
+                            ],
+                            searchTip: '搜索帖子',
+                            rules: [
+                                { required: true, message: "请输入搜索关键字", trigger: "change" },
+                                {
+                                    min: 3,
+                                    max: 50,
+                                    message: "长度在 3 到 50 个字符",
+                                    trigger: "blur",
+                                },
+                            ]
                         }
                     },
                     {
@@ -133,6 +147,7 @@ router.beforeEach((to, from, next) => {
 router.afterEach(() => {
     NProgress.done()
 })
+
 
 router.push('/')
 

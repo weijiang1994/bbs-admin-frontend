@@ -48,4 +48,37 @@ function postReviewFail(params) {
     })
 }
 
-export { reviewPostList, reviewBatchPass, reviewBatchFail, postDetail, postReviewPass, postReviewFail }
+
+function postList(params) {
+    return request({
+        url: '/post/list',
+        method: 'get',
+        params: params
+    })
+}
+
+function postSearch(params) {
+    return request({
+        url: '/post/search',
+        method: 'post',
+        data: params
+    })
+}
+
+function postBatchBlock(params) {
+    return request({
+        url: '/post/batch-block',
+        method: 'post',
+        data: params
+    })
+}
+
+function postBatchUnblock(params) {
+    return request({
+        url: '/post/batch-unblock',
+        method: 'post',
+        data: params
+    })
+}
+
+export { reviewPostList, reviewBatchPass, reviewBatchFail, postDetail, postReviewPass, postReviewFail, postList, postSearch, postBatchBlock, postBatchUnblock }

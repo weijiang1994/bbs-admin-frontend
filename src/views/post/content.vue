@@ -20,7 +20,7 @@
         <article v-html="post.content" v-highlight></article>
       </div>
     </div>
-    <div style="margin-top: 8px">
+    <div v-if="review.show" style="margin-top: 8px">
       <el-tabs v-model="review.name" @tab-click="switchTab">
         <el-tab-pane label="审核通过" name="pass">
           <el-input type="textarea" :rows="5" value="审核通过" disabled>
@@ -45,7 +45,7 @@
         >审核帖子</el-button
       >
     </div>
-    <el-backtop target=".post" :bottom="300">
+    <el-backtop target=".post" :bottom="bottom">
       <div><i class="fa fa-arrow-up"></i></div>
     </el-backtop>
   </div>
@@ -59,6 +59,7 @@ export default {
   name: "PostContent",
   data() {
     return {
+      bottom: 300,
       height: "500px",
       post: {
         title: "",
@@ -71,9 +72,20 @@ export default {
         pass: true,
         reason: "",
         name: "pass",
+        show: true,
       },
       postId: "",
     };
+  },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      // 如果是从帖子编辑页面路由过来的则不显示下方的帖子审核相关UI
+      if (from.path === '/post/edit') {
+        vm.review.show = false
+        vm.height = '650px'
+        vm.bottom = 200
+      }
+    });
   },
   created() {
     this.getPostDetail();
@@ -123,7 +135,6 @@ export default {
         });
       }
     },
-    
   },
 };
 </script>
