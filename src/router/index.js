@@ -103,7 +103,11 @@ const routes = [
                         name: 'Category',
                         component: Category,
                         meta: {
-                            title: '帖子类别'
+                            title: '帖子类别',
+                            searchData: [
+                                { label: '类别名', value: 'name' },
+                            ],
+                            searchTip: '搜索帖子类别',
                         }
                     },
                     {

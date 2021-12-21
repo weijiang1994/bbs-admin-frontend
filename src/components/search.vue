@@ -91,10 +91,12 @@ export default {
     },
   },
   created() {
-    this.category = this.$route.meta.searchData
-    this.searchForm.category = this.category[0].value
-    this.searchTip = this.$route.meta.searchTip
-    this.rules.keyword = this.$route.meta.rules
+    this.category = this.$route.meta.searchData;
+    this.searchForm.category = this.category[0].value;
+    this.searchTip = this.$route.meta.searchTip;
+    if (this.$route.meta.rules) {
+      this.rules.keyword = this.$route.meta.rules;
+    }
   },
 };
 </script>

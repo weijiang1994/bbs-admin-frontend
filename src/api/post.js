@@ -81,4 +81,12 @@ function postBatchUnblock(params) {
     })
 }
 
-export { reviewPostList, reviewBatchPass, reviewBatchFail, postDetail, postReviewPass, postReviewFail, postList, postSearch, postBatchBlock, postBatchUnblock }
+function postCategoryList(params) {
+    return request({
+        url: '/post/category/list',
+        method: 'get',
+        params: params
+    })
+}
+
+export { reviewPostList, reviewBatchPass, reviewBatchFail, postDetail, postReviewPass, postReviewFail, postList, postSearch, postBatchBlock, postBatchUnblock, postCategoryList }
