@@ -2,11 +2,10 @@
   <el-aside :width="menuWidth">
     <el-row class="tac">
       <el-col>
-
         <el-menu
-                :unique-opened="true"
+          :unique-opened="true"
           :collapse="isCollapse"
-          :collapse-transition = "false"
+          :collapse-transition="false"
           default-active="1"
           class="el-menu-vertical-demo"
           @open="handleOpen"
@@ -46,8 +45,21 @@
               >
             </el-menu-item-group>
           </el-submenu>
+          <el-submenu index="4">
+            <template slot="title">
+              <i class="fa fa-comments fa-fw mr"></i>
+              <span>评论管理</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="4-1"
+                ><i class="fa fa-pencil fa-fw mr"></i>评论编辑</el-menu-item
+              >
+              <el-menu-item index="4-2"
+                ><i class="fa fa-paw fa-fw mr"></i>评论分析</el-menu-item
+              >
+            </el-menu-item-group>
+          </el-submenu>
         </el-menu>
-
       </el-col>
     </el-row>
   </el-aside>
@@ -55,15 +67,14 @@
 
 <script>
 export default {
-  props:{
-    isCollapse: {type: Boolean, default: false},
-    menuWidth: {type: String, default: '220px'}
+  props: {
+    isCollapse: { type: Boolean, default: false },
+    menuWidth: { type: String, default: "220px" },
   },
   data() {
     return {};
   },
-  beforeCreate() {
-  },
+  beforeCreate() {},
   methods: {
     handleOpen(key, keyPath) {},
     handleClose(key, keyPath) {},
@@ -86,25 +97,25 @@ export default {
 </script>
 
 <style scoped>
-  .el-row {
-    height: 100%;
-  }
+.el-row {
+  height: 100%;
+}
 
-  .el-menu {
-    border-right: none;
-  }
+.el-menu {
+  border-right: none;
+}
 
-  .el-aside {
-    border-right: 1px solid #f5f1f1;
-    transition: width 0.15s;
-    -webkit-transition: width 0.15s;
-    -moz-transition: width 0.15s;
-    -webkit-transition: width 0.15s;
-    -o-transition: width 0.15s;
-  }
+.el-aside {
+  border-right: 1px solid #f5f1f1;
+  transition: width 0.15s;
+  -webkit-transition: width 0.15s;
+  -moz-transition: width 0.15s;
+  -webkit-transition: width 0.15s;
+  -o-transition: width 0.15s;
+}
 
-  .mr {
-    margin-right: 4px;
-    font-size: 18px;
-  }
+.mr {
+  margin-right: 4px;
+  font-size: 18px;
+}
 </style>
