@@ -222,8 +222,4 @@ export default {
 .operator-button-div {
   margin-top: 3px;
 }
-.search-div {
-  flex-grow: 1;
-  text-align: end;
-}
 </style>
