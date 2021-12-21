@@ -8,7 +8,7 @@ import User from '@/views/user/user'
 import Review from '@/views/post/review'
 import Post from '@/views/post/post'
 import Edit from '@/views/post/edit'
-import PostContent from '@/views/post/content'
+import PostContent from '@/views/post/components/content'
 import Category from '@/views/post/category'
 import Topic from '@/views/post/topic'
 import { getToken } from "@/util/token";
