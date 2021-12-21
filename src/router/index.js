@@ -149,6 +149,7 @@ router.afterEach(() => {
 })
 
 
+
 router.push('/')
 
 export default router
