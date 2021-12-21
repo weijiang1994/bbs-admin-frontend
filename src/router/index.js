@@ -8,7 +8,7 @@ import User from '@/views/user/user'
 import Review from '@/views/post/review'
 import Post from '@/views/post/post'
 import Edit from '@/views/post/edit'
-import PostContent from '@/views/post/content'
+import PostContent from '@/views/post/components/content'
 import Category from '@/views/post/category'
 import Topic from '@/views/post/topic'
 import { getToken } from "@/util/token";
@@ -81,7 +81,21 @@ const routes = [
                         name: 'Edit',
                         component: Edit,
                         meta: {
-                            title: '帖子编辑'
+                            title: '帖子编辑',
+                            searchData: [
+                                { label: '标题', value: 'title' },
+                                { label: '作者', value: 'author' }
+                            ],
+                            searchTip: '搜索帖子',
+                            rules: [
+                                { required: true, message: "请输入搜索关键字", trigger: "change" },
+                                {
+                                    min: 3,
+                                    max: 50,
+                                    message: "长度在 3 到 50 个字符",
+                                    trigger: "blur",
+                                },
+                            ]
                         }
                     },
                     {
@@ -89,7 +103,11 @@ const routes = [
                         name: 'Category',
                         component: Category,
                         meta: {
-                            title: '帖子类别'
+                            title: '帖子类别',
+                            searchData: [
+                                { label: '类别名', value: 'name' },
+                            ],
+                            searchTip: '搜索帖子类别',
                         }
                     },
                     {
@@ -133,6 +151,8 @@ router.beforeEach((to, from, next) => {
 router.afterEach(() => {
     NProgress.done()
 })
+
+
 
 router.push('/')
 

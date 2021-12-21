@@ -1,6 +1,7 @@
 import axios from "axios";
 import { MessageBox, Message } from 'element-ui'
 import { getToken, removeToken } from '@/util/token'
+import NProgress from 'nprogress'
 
 // 创建axios实例
 const service = axios.create({
@@ -14,6 +15,7 @@ service.defaults.headers['Content-Type'] = 'application/json'
 // 请求拦截器
 service.interceptors.request.use(
     config => {
+        NProgress.start()
         config.headers['Access-Token'] = getToken('Access-Token')
         return config
     }, error => {
@@ -26,6 +28,7 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
     response => {
+        NProgress.done()
         const res = response.data
         // 后端返回code不为200显示错误提示信息
         if (res.code !== 200) {
