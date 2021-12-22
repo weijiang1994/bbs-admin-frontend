@@ -89,4 +89,44 @@ function postCategoryList(params) {
     })
 }
 
-export { reviewPostList, reviewBatchPass, reviewBatchFail, postDetail, postReviewPass, postReviewFail, postList, postSearch, postBatchBlock, postBatchUnblock, postCategoryList }
+function postTopicList(params) {
+    return request({
+        url: '/post/topic/list',
+        method: 'get',
+        params: params
+    })
+}
+
+function addTopic(params) {
+    return request({
+        url: '/post/topic/new',
+        method: 'post',
+        data: params
+    })
+}
+
+
+function editTopic(params) {
+    return request({
+        url: '/post/topic/edit',
+        method: 'post',
+        data: params
+    })
+}
+
+export {
+    reviewPostList,
+    reviewBatchPass,
+    reviewBatchFail,
+    postDetail,
+    postReviewPass,
+    postReviewFail,
+    postList,
+    postSearch,
+    postBatchBlock,
+    postBatchUnblock,
+    postCategoryList,
+    postTopicList,
+    addTopic,
+    editTopic
+}

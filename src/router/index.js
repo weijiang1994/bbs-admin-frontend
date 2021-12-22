@@ -115,7 +115,11 @@ const routes = [
                         name: 'Topic',
                         component: Topic,
                         meta: {
-                            title: '帖子主题'
+                            title: '帖子主题',
+                            searchData: [
+                                { label: '主题名', value: 'name' },
+                            ],
+                            searchTip: '搜索帖子主题',
                         }
                     }
                 ]
