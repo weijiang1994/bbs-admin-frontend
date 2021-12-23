@@ -89,6 +89,15 @@ function postCategoryList(params) {
     })
 }
 
+
+function searchCategory(params) {
+    return request({
+        url: '/post/category/search',
+        method: 'post',
+        data: params
+    })
+}
+
 function postTopicList(params) {
     return request({
         url: '/post/topic/list',
@@ -134,6 +143,7 @@ export {
     postBatchBlock,
     postBatchUnblock,
     postCategoryList,
+    searchCategory,
     postTopicList,
     addTopic,
     editTopic,
