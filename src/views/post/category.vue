@@ -2,7 +2,7 @@
   <div id="category">
     <div style="display: flex">
       <div class="mt-2">
-        <el-button type="primary" size="small">新增类别</el-button>
+        <el-button type="primary" size="small" @click="newCategory">新增类别</el-button>
       </div>
       <div class="search-div">
         <search @reset="reset" @search="search"></search>
@@ -104,6 +104,9 @@ export default {
     editCategory(row) {
       this.$router.push(`/post/category/edit/${row.id}`)
     },
+    newCategory(){
+      this.$router.push('/post/category/new')
+    }
   },
   created() {
     this.getPostCategoryList();
