@@ -7,7 +7,7 @@
         >
       </div>
       <div class="search-div">
-        <search @reset="resetPage"></search>
+        <search @reset="resetPage" @search="search"></search>
       </div>
     </div>
     <el-table :data="topicList" style="width: 100%" height="680">
@@ -80,7 +80,7 @@
 <script>
 import Pagination from "@/components/pagination.vue";
 import Search from "@/components/search";
-import { postTopicList } from "@/api/post";
+import { postTopicList, searchTopic } from "@/api/post";
 import AddTopicDialog from "./components/AddTopicDialog.vue";
 export default {
   data() {
@@ -136,6 +136,15 @@ export default {
     },
     topicDialogClose() {
       this.topicDialog.show = false;
+    },
+    search(datas) {
+      let params = { name: datas[0] };
+      searchTopic(params)
+        .then((res) => {
+          this.topicList = res.data;
+          this.paginationData.disabled = true
+        })
+        .catch(() => {});
     },
   },
 };

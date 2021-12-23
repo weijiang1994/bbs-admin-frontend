@@ -1,13 +1,14 @@
 <template>
-  <div>
-    <el-dialog :title="title" :visible.sync="isShow" @close="close">
+  <div id="topicDialog">
+    <el-dialog :title="title" :visible.sync="isShow" @close="close" width="30%">
       <el-form
         ref="topicData"
         :model="topicData"
         :rules="rules"
-        label-width="100px"
+        label-width="90px"
+        label-position="left"
       >
-        <el-form-item label="ID:" v-if="!isAdd" inline>
+        <el-form-item label="ID:" v-if="!isAdd" prop="id">
           <el-input v-model="topicData.id" disabled></el-input>
         </el-form-item>
         <el-form-item label="主题名:" prop="name">
@@ -41,6 +42,7 @@ export default {
   data() {
     return {
       rules: {
+        id: [{ required: true }],
         name: [
           { required: true, message: "请输入主题名称", trigger: "change" },
           {
@@ -113,3 +115,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+#topicDialog /deep/ .el-dialog__body {
+  padding-bottom: 1px;
+}
+</style>

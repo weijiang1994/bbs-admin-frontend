@@ -114,6 +114,14 @@ function editTopic(params) {
     })
 }
 
+function searchTopic(params) {
+    return request({
+        url: '/post/topic/search',
+        method: 'post',
+        data: params
+    })
+}
+
 export {
     reviewPostList,
     reviewBatchPass,
@@ -128,5 +136,6 @@ export {
     postCategoryList,
     postTopicList,
     addTopic,
-    editTopic
+    editTopic,
+    searchTopic
 }
