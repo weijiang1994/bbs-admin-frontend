@@ -11,6 +11,7 @@ import Edit from '@/views/post/edit'
 import PostContent from '@/views/post/components/content'
 import Category from '@/views/post/category'
 import Topic from '@/views/post/topic'
+import CategoryDetail from '@/views/post/components/CategoryDetail'
 import { getToken } from "@/util/token";
 import { Message } from 'element-ui'
 import NProgress from 'nprogress'//引入nprogress
@@ -108,6 +109,14 @@ const routes = [
                                 { label: '类别名', value: 'name' },
                             ],
                             searchTip: '搜索帖子类别',
+                        }
+                    },
+                    {
+                        path: 'category/:action/:id?',
+                        name: 'CategoryOpearator',
+                        component: CategoryDetail,
+                        meta:{
+                            title: '帖子类别操作'
                         }
                     },
                     {

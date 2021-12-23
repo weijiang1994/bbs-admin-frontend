@@ -2,7 +2,7 @@
   <div id="topic">
     <div style="display: flex">
       <div class="mt-2">
-        <el-button type="primary" size="small" @click="newTopic"
+        <el-button type="primary" size="mini" @click="newTopic"
           >新增主题</el-button
         >
       </div>

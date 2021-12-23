@@ -98,6 +98,24 @@ function searchCategory(params) {
     })
 }
 
+
+function categoryDetail(params) {
+    return request({
+        url: '/post/category/detail',
+        method: 'post',
+        data: params
+    })
+}
+
+
+function editCategory(params) {
+    return request({
+        url: '/post/category/edit',
+        method: 'post',
+        data: params
+    })
+}
+
 function postTopicList(params) {
     return request({
         url: '/post/topic/list',
@@ -131,6 +149,14 @@ function searchTopic(params) {
     })
 }
 
+
+function allTopic() {
+    return request({
+        url: '/post/topic/all',
+        method: 'get'
+    })
+}
+
 export {
     reviewPostList,
     reviewBatchPass,
@@ -144,8 +170,11 @@ export {
     postBatchUnblock,
     postCategoryList,
     searchCategory,
+    categoryDetail,
+    editCategory,
     postTopicList,
     addTopic,
     editTopic,
-    searchTopic
+    searchTopic,
+    allTopic
 }

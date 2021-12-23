@@ -39,6 +39,13 @@
         label="类别图片"
       >
       </el-table-column>
+      <el-table-column header-align="center" align="center" label="操作">
+        <template v-slot="scope">
+          <el-button size="mini" type="primary" @click="editCategory(scope.row)"
+            >编辑</el-button
+          >
+        </template>
+      </el-table-column>
     </el-table>
     <pagination
       :disable="paginationData.disable"
@@ -58,6 +65,7 @@ export default {
     return {
       total: 0,
       cateList: [],
+      categoryData: {},
       paginationData: {
         page: 1,
         limit: 20,
@@ -92,6 +100,9 @@ export default {
         this.cateList = res.data;
         this.paginationData.disable = true;
       });
+    },
+    editCategory(row) {
+      this.$router.push(`/post/category/edit/${row.id}`)
     },
   },
   created() {
