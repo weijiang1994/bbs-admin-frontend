@@ -89,4 +89,92 @@ function postCategoryList(params) {
     })
 }
 
-export { reviewPostList, reviewBatchPass, reviewBatchFail, postDetail, postReviewPass, postReviewFail, postList, postSearch, postBatchBlock, postBatchUnblock, postCategoryList }
+
+function searchCategory(params) {
+    return request({
+        url: '/post/category/search',
+        method: 'post',
+        data: params
+    })
+}
+
+
+function categoryDetail(params) {
+    return request({
+        url: '/post/category/detail',
+        method: 'post',
+        data: params
+    })
+}
+
+
+function editCategory(params) {
+    return request({
+        url: '/post/category/edit',
+        method: 'post',
+        data: params
+    })
+}
+
+function postTopicList(params) {
+    return request({
+        url: '/post/topic/list',
+        method: 'get',
+        params: params
+    })
+}
+
+function addTopic(params) {
+    return request({
+        url: '/post/topic/new',
+        method: 'post',
+        data: params
+    })
+}
+
+
+function editTopic(params) {
+    return request({
+        url: '/post/topic/edit',
+        method: 'post',
+        data: params
+    })
+}
+
+function searchTopic(params) {
+    return request({
+        url: '/post/topic/search',
+        method: 'post',
+        data: params
+    })
+}
+
+
+function allTopic() {
+    return request({
+        url: '/post/topic/all',
+        method: 'get'
+    })
+}
+
+export {
+    reviewPostList,
+    reviewBatchPass,
+    reviewBatchFail,
+    postDetail,
+    postReviewPass,
+    postReviewFail,
+    postList,
+    postSearch,
+    postBatchBlock,
+    postBatchUnblock,
+    postCategoryList,
+    searchCategory,
+    categoryDetail,
+    editCategory,
+    postTopicList,
+    addTopic,
+    editTopic,
+    searchTopic,
+    allTopic
+}

@@ -59,9 +59,9 @@ export default {
         keyword: [
           { required: true, message: "请输入搜索关键字", trigger: "change" },
           {
-            min: 3,
+            min: 1,
             max: 10,
-            message: "长度在 3 到 10 个字符",
+            message: "长度在 1 到 10 个字符",
             trigger: "blur",
           },
         ],

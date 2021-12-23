@@ -2,10 +2,10 @@
   <div id="category">
     <div style="display: flex">
       <div class="mt-2">
-        <el-button type="primary" size="small">新增类别</el-button>
+        <el-button type="primary" size="small" @click="newCategory">新增类别</el-button>
       </div>
       <div class="search-div">
-        <search></search>
+        <search @reset="reset" @search="search"></search>
       </div>
     </div>
     <el-table :data="cateList" style="width: 100%" height="680">
@@ -16,16 +16,14 @@
         prop="topic"
         label="所属主题"
       >
-      <template slot-scope="scope">
-        <el-tag v-if="scope.row.topic_id===null" type="warning">{{scope.row.topic}}</el-tag>
-        <el-tag v-else type="success">{{scope.row.topic}}</el-tag>
-      </template>
+        <template slot-scope="scope">
+          <el-tag v-if="scope.row.topic_id === null" type="warning">{{
+            scope.row.topic
+          }}</el-tag>
+          <el-tag v-else type="success">{{ scope.row.topic }}</el-tag>
+        </template>
       </el-table-column>
-      <el-table-column
-        header-align="center"
-        prop="desc"
-        label="类别描述"
-      >
+      <el-table-column header-align="center" prop="desc" label="类别描述">
       </el-table-column>
       <el-table-column
         header-align="center"
@@ -41,6 +39,13 @@
         label="类别图片"
       >
       </el-table-column>
+      <el-table-column header-align="center" align="center" label="操作">
+        <template v-slot="scope">
+          <el-button size="mini" type="primary" @click="editCategory(scope.row)"
+            >编辑</el-button
+          >
+        </template>
+      </el-table-column>
     </el-table>
     <pagination
       :disable="paginationData.disable"
@@ -54,12 +59,13 @@
 <script>
 import Pagination from "../../components/pagination.vue";
 import Search from "../../components/search.vue";
-import { postCategoryList } from "@/api/post";
+import { postCategoryList, searchCategory } from "@/api/post";
 export default {
   data() {
     return {
       total: 0,
       cateList: [],
+      categoryData: {},
       paginationData: {
         page: 1,
         limit: 20,
@@ -78,8 +84,29 @@ export default {
         this.cateList = res.data;
       });
     },
-    changeCurrentPage() {},
-    changePageSize() {},
+    changeCurrentPage(page) {
+      this.paginationData.page = page;
+    },
+    changePageSize(size) {
+      this.paginationData.limit = size;
+    },
+    reset() {
+      this.getPostCategoryList();
+      this.paginationData.disable = false;
+    },
+    search(datas) {
+      let params = { name: datas[0] };
+      searchCategory(params).then((res) => {
+        this.cateList = res.data;
+        this.paginationData.disable = true;
+      });
+    },
+    editCategory(row) {
+      this.$router.push(`/post/category/edit/${row.id}`)
+    },
+    newCategory(){
+      this.$router.push('/post/category/new')
+    }
   },
   created() {
     this.getPostCategoryList();
