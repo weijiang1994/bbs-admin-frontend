@@ -125,8 +125,8 @@ import {
   queryUser,
   batchBanUser,
 } from "@/api/user";
-import Search from "./components/search";
-import EditUserDialog from "./components/edit";
+import Search from "./components/UserSearch";
+import EditUserDialog from "./components/UserEdit";
 
 export default {
   name: "User",
