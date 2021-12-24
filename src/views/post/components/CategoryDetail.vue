@@ -36,10 +36,7 @@
         </el-form-item>
         <el-form-item label="示例图片" prop="cate_img">
           <div class="img-div">
-            <img
-              src="https://bbs.2dogz.cn/normal/image/avatars/523ed2a689cf46bfb6c9521e1e139f92_l.png"
-              alt=""
-            />
+            <img :src="imageUrl" alt="示例图片" />
             <div style="margin-left: 30px">
               <el-button type="primary" size="mini" @click="changeImage"
                 >修改图片</el-button
@@ -47,7 +44,7 @@
             </div>
           </div>
         </el-form-item>
-        <el-form-item label="创建时间" prop="create_time">
+        <el-form-item v-if="isEdit" label="创建时间" prop="create_time">
           <el-input
             v-model="formData.create_time"
             :disabled="isEdit"
@@ -66,28 +63,39 @@
         </el-form-item>
       </el-form>
       <el-dialog
-          title="裁剪图片"
-          :visible.sync="showChangeImageDialog"
-          >
-          <div>
-              <cropper-image></cropper-image>
-          </div>
-          
+        title="裁剪图片"
+        :visible.sync="showChangeImageDialog"
+        width="60%"
+      >
+        <div>
+          <cropper-image
+            :categoryId="categoryId"
+            @uploadDone="uploadDone"
+          ></cropper-image>
+        </div>
       </el-dialog>
     </div>
   </div>
 </template>
 
 <script>
-import { allTopic, categoryDetail, editCategory } from "@/api/post";
+import {
+  allTopic,
+  categoryDetail,
+  editCategory,
+  addCategory,
+} from "@/api/post";
 import { showNotice } from "@/util/notice";
-import CropperImage from '@/components/CropperImage'
+import CropperImage from "@/components/CropperImage";
 
 export default {
   name: "CategoryDetail",
   components: { CropperImage },
   data() {
     return {
+      filename: "",
+      baseUrl: process.env.VUE_APP_BASE_BACKEND_URL,
+      imageUrl: "",
       showChangeImageDialog: false,
       submitButtonText: "保存编辑",
       rules: {
@@ -121,18 +129,31 @@ export default {
     };
   },
   methods: {
+    uploadDone(data) {
+      this.formData.cate_img = data.imageUrl;
+      this.imageUrl = this.baseUrl + data.imageUrl;
+      this.showChangeImageDialog = false;
+      this.filename = data.filename;
+    },
     changeImage() {
       this.showChangeImageDialog = true;
     },
     submitForm() {
       this.$refs["formData"].validate((valid) => {
         if (valid) {
-          editCategory({ data: this.formData, id: this.categoryId })
-            .then((res) => {
-              this.goBack();
-              showNotice(res.msg, "编辑成功", "success");
-            })
-            .catch(() => {});
+          if (this.isEdit) {
+            editCategory({ data: this.formData, id: this.categoryId })
+              .then((res) => {
+                showNotice(res.msg, "编辑成功", "success");
+              })
+              .catch(() => {});
+          } else {
+            let params = { data: this.formData, filename: this.filename };
+            addCategory(params).then((res) => {
+              showNotice(res.msg, "成功", "success");
+            });
+          }
+          this.goBack();
         }
       });
     },
@@ -157,6 +178,9 @@ export default {
       categoryDetail({ id: this.categoryId }).then((res) => {
         this.formData = res.data;
         this.title = `编辑类别${this.formData.name}`;
+        if (this.formData.cate_img === "") {
+          this.imageUrl = "";
+        } else this.imageUrl = this.baseUrl + this.formData.cate_img;
       });
     },
   },

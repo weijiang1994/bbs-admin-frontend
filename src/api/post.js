@@ -108,6 +108,14 @@ function categoryDetail(params) {
 }
 
 
+function addCategory(params) {
+    return request({
+        url: '/post/category/new',
+        method: 'post',
+        data: params
+    })
+}
+
 function editCategory(params) {
     return request({
         url: '/post/category/edit',
@@ -171,6 +179,7 @@ export {
     postCategoryList,
     searchCategory,
     categoryDetail,
+    addCategory,
     editCategory,
     postTopicList,
     addTopic,

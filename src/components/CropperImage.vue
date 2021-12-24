@@ -43,7 +43,7 @@
           />
           <el-button
             size="mini"
-            type="danger"
+            type="primary"
             plain
             icon="el-icon-zoom-in"
             @click="changeScale(1)"
@@ -51,16 +51,16 @@
           >
           <el-button
             size="mini"
-            type="danger"
+            type="primary"
             plain
             icon="el-icon-zoom-out"
             @click="changeScale(-1)"
             >缩小</el-button
           >
-          <el-button size="mini" type="danger" plain @click="rotateLeft"
+          <el-button size="mini" type="primary" plain @click="rotateLeft"
             >↺ 左旋转</el-button
           >
-          <el-button size="mini" type="danger" plain @click="rotateRight"
+          <el-button size="mini" type="primary" plain @click="rotateRight"
             >↻ 右旋转</el-button
           >
         </div>
@@ -82,12 +82,13 @@
 
 <script>
 import { VueCropper } from "vue-cropper";
+import { uploadImage } from "@/api/tool";
 export default {
   name: "CropperImage",
   components: {
     VueCropper,
   },
-  props: ["Name"],
+  props: ["Name", "categoryId"],
   data() {
     return {
       name: this.Name,
@@ -99,21 +100,21 @@ export default {
         info: true, //图片大小信息
         canScale: true, //图片是否允许滚轮缩放
         autoCrop: true, //是否默认生成截图框
-        autoCropWidth: 230, //默认生成截图框宽度
+        autoCropWidth: 150, //默认生成截图框宽度
         autoCropHeight: 150, //默认生成截图框高度
-        fixed: true, //是否开启截图框宽高固定比例
-        fixedNumber: [1.53, 1], //截图框的宽高比例
+        fixed: false, //是否开启截图框宽高固定比例
+        fixedNumber: [1, 1], //截图框的宽高比例
         full: false, //false按原比例裁切图片，不失真
         fixedBox: true, //固定截图框大小，不允许改变
-        canMove: false, //上传图片是否可以移动
+        canMove: true, //上传图片是否可以移动
         canMoveBox: true, //截图框能否拖动
         original: false, //上传图片按照原始比例渲染
-        centerBox: false, //截图框是否被限制在图片里面
+        centerBox: true, //截图框是否被限制在图片里面
         height: true, //是否按照设备的dpr 输出等比例图片
         infoTrue: false, //true为展示真实输出图片宽高，false展示看到的截图框宽高
         maxImgSize: 3000, //限制图片最大宽度和高度
         enlarge: 1, //图片根据截图框输出比例倍数
-        mode: "230px 150px", //图片默认渲染方式
+        mode: "cover", //图片默认渲染方式
       },
     };
   },
@@ -165,36 +166,14 @@ export default {
     },
     //上传图片
     uploadImg(type) {
-      let _this = this;
-      if (type === "blob") {
-        //获取截图的blob数据
-        this.$refs.cropper.getCropBlob(async (data) => {
-          let formData = new FormData();
-          formData.append("file", data, "DX.jpg");
-          //调用axios上传
-          let { data: res } = await _this.$http.post(
-            "/api/file/imgUpload",
-            formData
-          );
-          if (res.code === 200) {
-            _this.$message({
-              message: res.msg,
-              type: "success",
-            });
-            let data = res.data.replace("[", "").replace("]", "").split(",");
-            let imgInfo = {
-              name: _this.Name,
-              url: data[0],
-            };
-            _this.$emit("uploadImgSuccess", imgInfo);
-          } else {
-            _this.$message({
-              message: "文件服务异常，请联系管理员！",
-              type: "error",
-            });
-          }
+      this.$refs.cropper.getCropData((data) => {
+        uploadImage({ bs64: data, categoryId: this.categoryId }).then((res) => {
+          this.$emit("uploadDone", {
+            imageUrl: res.img_url,
+            filename: res.filename,
+          });
         });
-      }
+      });
     },
   },
 };
