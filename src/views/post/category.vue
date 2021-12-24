@@ -2,7 +2,9 @@
   <div id="category">
     <div style="display: flex">
       <div class="mt-2">
-        <el-button type="primary" size="small" @click="newCategory">新增类别</el-button>
+        <el-button type="primary" size="small" @click="newCategory"
+          >新增类别</el-button
+        >
       </div>
       <div class="search-div">
         <search @reset="reset" @search="search"></search>
@@ -38,6 +40,10 @@
         prop="cate_img"
         label="类别图片"
       >
+        <template slot-scope="scope">
+          <img v-if="scope.row.cate_img" :src="getImageUrl(scope.row.cate_img)" alt="示例图" class="tip-img"/>
+          <p v-else>暂无图片</p>
+        </template>
       </el-table-column>
       <el-table-column header-align="center" align="center" label="操作">
         <template v-slot="scope">
@@ -75,6 +81,10 @@ export default {
   },
   components: { Pagination, Search },
   methods: {
+
+    getImageUrl(path){
+      return process.env.VUE_APP_BASE_BACKEND_URL + path
+    },
     getPostCategoryList() {
       let params = {
         page: this.paginationData.page,
@@ -82,6 +92,7 @@ export default {
       };
       postCategoryList(params).then((res) => {
         this.cateList = res.data;
+        this.total = res.total;
       });
     },
     changeCurrentPage(page) {
@@ -102,14 +113,21 @@ export default {
       });
     },
     editCategory(row) {
-      this.$router.push(`/post/category/edit/${row.id}`)
+      this.$router.push(`/post/category/edit/${row.id}`);
     },
-    newCategory(){
-      this.$router.push('/post/category/new')
-    }
+    newCategory() {
+      this.$router.push("/post/category/new");
+    },
   },
   created() {
     this.getPostCategoryList();
   },
 };
 </script>
+<style scoped>
+.tip-img{
+  width: 55px;
+  height: 55px;
+  border-radius: 5px;
+}
+</style>
