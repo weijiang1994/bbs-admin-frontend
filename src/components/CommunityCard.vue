@@ -2,12 +2,24 @@
   <div>
     <el-skeleton animated :loading="loading">
       <template slot="template">
-        <div class="d-flex">
-          <el-skeleton-item variant="p mr-2"></el-skeleton-item>
+        <div class="community-card">
+          <div class="d-flex">
+            <el-skeleton-item
+              variant="p mr-2"
+              style="width: 50%"
+            ></el-skeleton-item>
+            <div
+              style="display: flex; flex-grow: 1; flex-direction: row-reverse"
+            >
+              <el-skeleton-item
+                variant="p"
+                style="width: 30%"
+              ></el-skeleton-item>
+            </div>
+          </div>
+          <el-skeleton-item variant="p mt-2" style="width: 40%"></el-skeleton-item>
           <el-skeleton-item variant="p"></el-skeleton-item>
         </div>
-        <el-skeleton-item variant="p mt-2"></el-skeleton-item>
-        <el-skeleton-item variant="p"></el-skeleton-item>
       </template>
     </el-skeleton>
     <template>
