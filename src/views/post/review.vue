@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import Pagination from "@/components/pagination";
+import Pagination from "@/components/Pagination.vue";
 import { reviewPostList, reviewBatchPass, reviewBatchFail } from "@/api/post";
 import { showMessage, showNotice, showConfirm } from "@/util/notice";
 

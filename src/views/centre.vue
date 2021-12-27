@@ -1,5 +1,3 @@
-<style>
-</style>
 <template>
   <div id="home">
     <el-row :gutter="10">

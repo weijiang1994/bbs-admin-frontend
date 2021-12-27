@@ -20,9 +20,9 @@
 
 
  <script>
-import navtop from "@/components/nav-top.vue";
-import leftNav from "@/components/nav.vue";
-import Bread from '../components/bread.vue';
+import navtop from "@/components/NavTop.vue";
+import leftNav from "@/components/LeftMenu.vue";
+import Bread from '@/components/Bread.vue';
 export default {
   components: {
     navtop,

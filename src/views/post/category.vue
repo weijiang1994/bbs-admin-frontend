@@ -63,8 +63,8 @@
 </template>
 
 <script>
-import Pagination from "../../components/pagination.vue";
-import Search from "../../components/search.vue";
+import Pagination from "@/components/Pagination";
+import Search from '@/components/Search'
 import { postCategoryList, searchCategory } from "@/api/post";
 export default {
   data() {

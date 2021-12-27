@@ -117,7 +117,7 @@
 </template>
 
 <script>
-import Pagination from "@/components/pagination";
+import Pagination from '@/components/Pagination'
 import {
   getUserList,
   banUser,

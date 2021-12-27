@@ -78,8 +78,8 @@
 </template>
 
 <script>
-import Pagination from "@/components/pagination.vue";
-import Search from "@/components/search";
+import Pagination from "@/components/Pagination.vue";
+import Search from '@/components/Search'
 import { postTopicList, searchTopic } from "@/api/post";
 import AddTopicDialog from "./components/AddTopicDialog.vue";
 export default {
