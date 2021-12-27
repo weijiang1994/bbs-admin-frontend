@@ -99,8 +99,8 @@
 </template>
 
 <script>
-import Pagination from "@/components/pagination.vue";
-import Search from "@/components/search.vue";
+import Pagination from "@/components/Pagination.vue";
+import Search from '@/components/Search'
 import { showNotice, showConfirm } from "@/util/notice";
 import {
   postList,
