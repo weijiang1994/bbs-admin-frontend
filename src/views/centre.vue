@@ -1,7 +1,7 @@
 <style>
 </style>
 <template>
-  <div id="centre">
+  <div id="home">
     <el-row :gutter="10">
       <el-col :span="18">
         <el-row :gutter="10">
@@ -53,7 +53,7 @@ export default {
 };
 </script>
 <style scoped>
-/deep/ .el-card__header {
+#home /deep/ .el-card__header {
   padding: 8px;
 }
 </style>
