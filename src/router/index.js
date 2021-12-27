@@ -19,11 +19,11 @@ import NProgress from 'nprogress'//引入nprogress
 Vue.use(VueRouter)
 
 // 解决路由redirect报错(redirect报错不会影响正常功能但是看着就是很烦)
-const originalPush = Router.prototype.push
-Router.prototype.push = function push(location, onResolve, onReject) {
-    if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
-    return originalPush.call(this, location).catch(err => err)
-}
+// const originalPush = Router.prototype.push
+// Router.prototype.push = function push(location, onResolve, onReject) {
+//     if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+//     return originalPush.call(this, location).catch(err => err)
+// }
 
 const routes = [
     {
@@ -165,8 +165,5 @@ router.afterEach(() => {
     NProgress.done()
 })
 
-
-
-router.push('/')
 
 export default router
