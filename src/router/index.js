@@ -12,6 +12,9 @@ import PostContent from '@/views/post/components/Content'
 import Category from '@/views/post/category'
 import Topic from '@/views/post/topic'
 import CategoryDetail from '@/views/post/components/CategoryDetail'
+import Comment from '@/views/comment/comment'
+import Manage from '@/views/comment/manage'
+
 import { getToken } from "@/util/token";
 import { Message } from 'element-ui'
 import NProgress from 'nprogress'//引入nprogress
@@ -115,7 +118,7 @@ const routes = [
                         path: 'category/:action/:id?',
                         name: 'CategoryOpearator',
                         component: CategoryDetail,
-                        meta:{
+                        meta: {
                             title: '帖子类别操作'
                         }
                     },
@@ -132,7 +135,36 @@ const routes = [
                         }
                     }
                 ]
+            },
+            {
+                path: 'comment',
+                name: 'Comment',
+                component: Comment,
+                children: [
+                    {
+                        path: 'manage',
+                        name: 'Manage',
+                        component: Manage,
+                        meta: {
+                            title: '评论管理',
+                            searchData: [
+                                { label: '作者', value: 'author' },
+                                { label: '内容', value: 'body' }
+                            ],
+                            searchTip: '搜索评论',
+                        }
+                    },
+                    {
+                        path: 'analysis',
+                        name: 'Analysis',
+                        meta: {
+                            title: '评论分析'
+                        }
+                    }
+
+                ]
             }
+
         ]
     }
 ]

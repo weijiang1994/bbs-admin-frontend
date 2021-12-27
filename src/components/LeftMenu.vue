@@ -51,10 +51,10 @@
               <span>评论管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="4-1"
+              <el-menu-item index="4-1" @click="goSecondPage('/comment', '/manage')"
                 ><i class="fa fa-pencil fa-fw mr"></i>评论编辑</el-menu-item
               >
-              <el-menu-item index="4-2"
+              <el-menu-item index="4-2" @click="goSecondPage('/comment', '/analysis')"
                 ><i class="fa fa-paw fa-fw mr"></i>评论分析</el-menu-item
               >
             </el-menu-item-group>
