@@ -27,7 +27,7 @@
         <div class="d-flex">
           <p>{{ infos.title }}</p>
           <div style="flex-grow: 1; display: flex; flex-direction: row-reverse">
-            <p class="badge-info">实时</p>
+            <p class="badge-info">{{type}}</p>
           </div>
         </div>
         <p class="count-detail">{{ infos.count }}</p>
@@ -48,6 +48,7 @@ export default {
         count: "",
         rooter: "",
       },
+      type: ""
     };
   },
   props: {
@@ -60,6 +61,7 @@ export default {
     })
       .then((res) => {
         this.infos = res.data;
+        this.type = '实时'
         this.loading = false;
       })
       .catch(() => {});
