@@ -16,6 +16,7 @@ service.defaults.headers['Content-Type'] = 'application/json'
 service.interceptors.request.use(
     config => {
         if (config.url !== '/community/server-status') {
+            // 轮训请求时,不加载进度条
             NProgress.start()
         }
         config.headers['Access-Token'] = getToken('Access-Token')
