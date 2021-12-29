@@ -179,7 +179,7 @@ const router = new VueRouter({
 // 导航守卫
 router.beforeEach((to, from, next) => {
     let token = getToken('Access-Token')
-    NProgress.start()
+    // NProgress.start()
     if (to.meta.title) {
         document.title = to.meta.title || '后台管理页面'
     }
@@ -194,7 +194,7 @@ router.beforeEach((to, from, next) => {
 
 
 router.afterEach(() => {
-    NProgress.done()
+    // NProgress.done()
 })
 
 
