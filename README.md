@@ -1,29 +1,34 @@
 
-# bbs-admin
+# BBS-Admin-Frontend
 
-## Project setup
+此仓库为[university-bbs](https://github.com/weijiang1994/university-bbs)项目后台管理系统前端代码，采用`vue2.x+element-ui`开发。
+### 获取代码
+```bash
+git clone https://github.com/weijiang1994/bbs-admin-frontend.git
+cd bbs-backend-frontend
+```
+### 安装依赖
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 运行
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 编译打包
 ```
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+### 关联仓库
+- [前台系统](https://github.com/weijiang1994/university-bbs)
+- [后台系统后端](https://github.com/weijiang1994/bbs-admin-backend)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-=======
-# university-bbs-admin-frontend
-university bbs admin frontend
+> 前台系统采用`flask`开发，没有采用前后端分离模式！
+
+### 效果图
+
+![效果图](/images/img.png)
 

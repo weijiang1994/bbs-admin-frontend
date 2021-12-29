@@ -2,7 +2,7 @@ import axios from "axios";
 import { MessageBox, Message } from 'element-ui'
 import { getToken, removeToken } from '@/util/token'
 import NProgress from 'nprogress'
-
+import router from '@/router/index.js'
 // 创建axios实例
 const service = axios.create({
     baseURL: process.env.VUE_APP_BASE_BACKEND_URL,
@@ -15,7 +15,10 @@ service.defaults.headers['Content-Type'] = 'application/json'
 // 请求拦截器
 service.interceptors.request.use(
     config => {
-        NProgress.start()
+        if (config.url !== '/community/server-status') {
+            // 轮训请求时,不加载进度条
+            NProgress.start()
+        }
         config.headers['Access-Token'] = getToken('Access-Token')
         return config
     }, error => {
