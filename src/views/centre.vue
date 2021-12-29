@@ -4,47 +4,66 @@
       <el-col :span="18">
         <el-row :gutter="10">
           <el-col :span="12">
-            <el-card shadow="hover">
-              <div slot="header"><i class="fa fa-cube mr-3"></i>社区概况</div>
-              <el-row :gutter="10">
-                <el-col :span="12">
-                  <community-card
-                    apiUrl="/community/user/info"
-                  ></community-card>
-                </el-col>
-                <el-col :span="12">
-                  <community-card
-                    apiUrl="/community/post/info"
-                  ></community-card>
-                </el-col>
-              </el-row>
-              <el-row :gutter="10" class="mt-10">
-                <el-col :span="12">
-                  <community-card
-                    apiUrl="/community/comment/info"
-                  ></community-card>
-                </el-col>
-                <el-col :span="12"
-                  ><community-card
-                    apiUrl="/community/user/register"
-                  ></community-card
-                ></el-col>
-              </el-row>
+            <el-card shadow="hover" :height="500">
+              <div slot="header">
+                <i class="fa fa-cube mr-3" style="color: #71cc59"></i>社区概况
+              </div>
+              <div style="height: 200px">
+                <el-row :gutter="10">
+                  <el-col :span="12">
+                    <community-card
+                      apiUrl="/community/user/info"
+                    ></community-card>
+                  </el-col>
+                  <el-col :span="12">
+                    <community-card
+                      apiUrl="/community/post/info"
+                    ></community-card>
+                  </el-col>
+                </el-row>
+                <el-row :gutter="10" class="mt-10">
+                  <el-col :span="12">
+                    <community-card
+                      apiUrl="/community/comment/info"
+                    ></community-card>
+                  </el-col>
+                  <el-col :span="12"
+                    ><community-card
+                      apiUrl="/community/user/register"
+                    ></community-card
+                  ></el-col>
+                </el-row>
+              </div>
             </el-card>
           </el-col>
           <el-col :span="12">
-            <el-card shadow="hover">
+            <el-card shadow="hover" :height="500">
               <div slot="header">
-                <i class="fa fa-map-marker mr-2"></i> 快捷入口
+                <i class="fa fa-map-marker mr-3" style="color: #71cc59"></i>
+                快捷入口
               </div>
-              <div></div>
+              <div class="flex-div-for-quick">
+                <div
+                  v-for="(item, index) in quickDatas"
+                  :key="index"
+                  class="flex-div-for-quick-item"
+                >
+                  <quick-link
+                    :icon="item.icon"
+                    :title="item.title"
+                    :router="item.router"
+                  ></quick-link>
+                </div>
+              </div>
             </el-card>
           </el-col>
         </el-row>
       </el-col>
       <el-col :span="6">
         <el-card shadow="hover">
-          <div slot="header"><i class="fa fa-file-o mr-3"></i>操作记录</div>
+          <div slot="header">
+            <i class="fa fa-file-o mr-3" style="color: #71cc59"></i>操作记录
+          </div>
           <div>
             <el-timeline>
               <el-timeline-item
@@ -60,7 +79,9 @@
         </el-card>
 
         <el-card shadow="hover" class="mt-10">
-          <div slot="header"><i class="fa fa-server mr-2"></i>服务器状态</div>
+          <div slot="header">
+            <i class="fa fa-server mr-3" style="color: #71cc59"></i>服务器状态
+          </div>
           <div>
             <p>CPU使用率</p>
             <el-progress
@@ -82,13 +103,53 @@
 <script>
 import CommunityCard from "@/components/CommunityCard";
 import { latestAdminLog, serverStatus } from "@/api/normal";
+import QuickLink from "../components/QuickLink.vue";
 export default {
   name: "Home",
   components: {
     CommunityCard,
+    QuickLink,
   },
   data() {
     return {
+      quickDatas: [
+        { title: "用户管理", icon: "fa fa-user fa-2x fa-fw", router: "/user" },
+        {
+          title: "帖子审核",
+          icon: "fa fa-check fa-fw fa-2x",
+          router: "/post/review",
+        },
+        {
+          title: "帖子编辑",
+          icon: "fa fa-edit fa-2x fa-fw",
+          router: "/post/edit",
+        },
+        {
+          title: "帖子类别",
+          icon: "fa fa-tag fa-2x fa-fw",
+          router: "/post/category",
+        },
+        {
+          title: "帖子主题",
+          icon: "fa fa-bookmark fa-2x fa-fw",
+          router: "/post/topic",
+        },
+        {
+          title: "评论编辑",
+          icon: "fa fa-pencil fa-fw fa-2x",
+          router: "/comment/manage",
+        },
+        {
+          title: "评论分析",
+          icon: "fa fa-paw fa-fw fa-2x",
+          router: "/comment/analysis",
+        },
+        {
+          title: "举报管理",
+          icon: "fa fa-bullhorn fa-fw fa-2x",
+          router: "/community/report",
+        },
+      ],
       adminLogs: [],
       server: {
         cpu: 20,
@@ -139,5 +200,14 @@ export default {
 <style scoped>
 #home /deep/ .el-card__header {
   padding: 8px;
+}
+.flex-div-for-quick {
+  height: 200px;
+  display: flex;
+  align-content: space-around;
+  flex-wrap: wrap;
+}
+.flex-div-for-quick-item {
+  flex-grow: 1;
 }
 </style>

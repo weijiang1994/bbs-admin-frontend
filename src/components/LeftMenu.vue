@@ -6,17 +6,17 @@
           :unique-opened="true"
           :collapse="isCollapse"
           :collapse-transition="false"
-          default-active="1"
+          :default-active="$route.path"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
         >
-          <el-menu-item index="1" @click="goPage('home')">
+          <el-menu-item index="/index" @click="goPage('home')">
             <i class="fa fa-home fa-fw mr"></i>
             <span slot="title">后台中心</span>
           </el-menu-item>
 
-          <el-menu-item index="2" @click="goPage('user')">
+          <el-menu-item index="/user" @click="goPage('user')">
             <i class="fa fa-user fa-fw mr"></i>
             <span slot="title">用户管理</span>
           </el-menu-item>
@@ -28,19 +28,19 @@
             </template>
             <el-menu-item-group>
               <el-menu-item
-                index="3-1"
+                index="/post/review"
                 @click="goSecondPage('/post', '/review')"
                 ><i class="fa fa-check fa-fw mr"></i>帖子审核</el-menu-item
               >
-              <el-menu-item index="3-2" @click="goSecondPage('/post', '/edit')"
+              <el-menu-item index="/post/edit" @click="goSecondPage('/post', '/edit')"
                 ><i class="fa fa-edit fa-fw mr"></i>帖子编辑</el-menu-item
               >
               <el-menu-item
-                index="3-3"
+                index="/post/category"
                 @click="goSecondPage('/post', '/category')"
                 ><i class="fa fa-tag fa-fw mr"></i>帖子类别</el-menu-item
               >
-              <el-menu-item index="3-4" @click="goSecondPage('/post', '/topic')"
+              <el-menu-item index="/post/topic" @click="goSecondPage('/post', '/topic')"
                 ><i class="fa fa-bookmark fa-fw mr"></i>帖子主题</el-menu-item
               >
             </el-menu-item-group>
@@ -51,10 +51,10 @@
               <span>评论管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="4-1" @click="goSecondPage('/comment', '/manage')"
+              <el-menu-item index="/comment/manage" @click="goSecondPage('/comment', '/manage')"
                 ><i class="fa fa-pencil fa-fw mr"></i>评论编辑</el-menu-item
               >
-              <el-menu-item index="4-2" @click="goSecondPage('/comment', '/analysis')"
+              <el-menu-item index="/comment/analysis" @click="goSecondPage('/comment', '/analysis')"
                 ><i class="fa fa-paw fa-fw mr"></i>评论分析</el-menu-item
               >
             </el-menu-item-group>
