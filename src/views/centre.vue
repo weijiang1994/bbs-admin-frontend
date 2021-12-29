@@ -122,18 +122,15 @@ export default {
         this.server = res.data;
         if (this.server.cpu < 40) {
           this.serverColor.cpu = "#5cb87a";
-        } else if (this.server.cpu > 40) {
+        } else if (40 < this.server.cpu && this.serverColor.cpu < 80) {
           this.serverColor.cpu = "#E6A23C";
-        } else if (this.server.cpu > 80) {
-          this.serverColor.cpu = "#F56C6C";
-        }
-        if (this.serverColor.mem < 40) {
+        } else this.serverColor.cpu = "#F56C6C";
+
+        if (this.server.mem < 40) {
           this.serverColor.mem = "#5cb87a";
-        } else if (this.server.mem > 40) {
+        } else if (40 < this.server.mem && this.server.mem < 80) {
           this.serverColor.mem = "#E6A23C";
-        } else if (this.server.mem > 80) {
-          this.serverColor.mem = "#F56C6C";
-        }
+        } else this.serverColor.mem = "#F56C6C";
       });
     },
   },
