@@ -15,7 +15,6 @@ service.defaults.headers['Content-Type'] = 'application/json'
 // 请求拦截器
 service.interceptors.request.use(
     config => {
-        console.log(config);
         if (config.url !== '/community/server-status') {
             NProgress.start()
         }
