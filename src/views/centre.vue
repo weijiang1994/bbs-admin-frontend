@@ -111,45 +111,45 @@ export default {
     QuickLink,
   },
   data() {
+    this.quickDatas = [
+      { title: "用户管理", icon: "fa fa-user fa-2x fa-fw", router: "/user" },
+      {
+        title: "帖子审核",
+        icon: "fa fa-check fa-fw fa-2x",
+        router: "/post/review",
+      },
+      {
+        title: "帖子编辑",
+        icon: "fa fa-edit fa-2x fa-fw",
+        router: "/post/edit",
+      },
+      {
+        title: "帖子类别",
+        icon: "fa fa-tag fa-2x fa-fw",
+        router: "/post/category",
+      },
+      {
+        title: "帖子主题",
+        icon: "fa fa-bookmark fa-2x fa-fw",
+        router: "/post/topic",
+      },
+      {
+        title: "评论编辑",
+        icon: "fa fa-pencil fa-fw fa-2x",
+        router: "/comment/manage",
+      },
+      {
+        title: "评论分析",
+        icon: "fa fa-paw fa-fw fa-2x",
+        router: "/comment/analysis",
+      },
+      {
+        title: "举报管理",
+        icon: "fa fa-bullhorn fa-fw fa-2x",
+        router: "/community/report",
+      },
+    ];
     return {
-      quickDatas: [
-        { title: "用户管理", icon: "fa fa-user fa-2x fa-fw", router: "/user" },
-        {
-          title: "帖子审核",
-          icon: "fa fa-check fa-fw fa-2x",
-          router: "/post/review",
-        },
-        {
-          title: "帖子编辑",
-          icon: "fa fa-edit fa-2x fa-fw",
-          router: "/post/edit",
-        },
-        {
-          title: "帖子类别",
-          icon: "fa fa-tag fa-2x fa-fw",
-          router: "/post/category",
-        },
-        {
-          title: "帖子主题",
-          icon: "fa fa-bookmark fa-2x fa-fw",
-          router: "/post/topic",
-        },
-        {
-          title: "评论编辑",
-          icon: "fa fa-pencil fa-fw fa-2x",
-          router: "/comment/manage",
-        },
-        {
-          title: "评论分析",
-          icon: "fa fa-paw fa-fw fa-2x",
-          router: "/comment/analysis",
-        },
-        {
-          title: "举报管理",
-          icon: "fa fa-bullhorn fa-fw fa-2x",
-          router: "/community/report",
-        },
-      ],
       adminLogs: [],
       server: {
         cpu: 20,

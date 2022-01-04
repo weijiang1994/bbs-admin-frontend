@@ -3,7 +3,7 @@
     <el-form :model="form">
       <el-form-item label="用户名" :label-width="formLabelWidth">
         <el-input
-        disabled
+          disabled
           v-model="form.username"
           autocomplete="off"
           size="medium"
@@ -12,7 +12,7 @@
 
       <el-form-item label="昵称" :label-width="formLabelWidth">
         <el-input
-        disabled
+          disabled
           v-model="form.nickname"
           autocomplete="off"
           size="medium"
@@ -21,7 +21,7 @@
 
       <el-form-item label="邮箱" :label-width="formLabelWidth">
         <el-input
-        disabled
+          disabled
           v-model="form.email"
           autocomplete="off"
           size="medium"
@@ -29,7 +29,11 @@
       </el-form-item>
 
       <el-form-item label="性别" :label-width="formLabelWidth">
-        <el-select v-model="form.gender_id" placeholder="请选择性别" size="medium">
+        <el-select
+          v-model="form.gender_id"
+          placeholder="请选择性别"
+          size="medium"
+        >
           <el-option
             v-for="item in gender"
             :label="item.label"
@@ -40,7 +44,11 @@
       </el-form-item>
 
       <el-form-item label="角色" :label-width="formLabelWidth">
-        <el-select v-model="form.role_id" placeholder="请选择角色" size="medium">
+        <el-select
+          v-model="form.role_id"
+          placeholder="请选择角色"
+          size="medium"
+        >
           <el-option
             v-for="item in role"
             :label="item.label"
@@ -76,28 +84,29 @@
 import { editUser } from "@/api/user";
 export default {
   data() {
+    this.gender = [
+      { label: "保密", value: 1 },
+      { label: "男", value: 2 },
+      { label: "女", value: 3 },
+    ];
+    this.role = [
+      { label: "超级管理员", value: 1 },
+      { label: "老师", value: 2 },
+      { label: "学生", value: 3 },
+    ];
+
     return {
       isShow: this.showEdit,
       form: {
         username: "",
         nickname: "",
-        gender_id: '',
+        gender_id: "",
         email: "",
-        role_id: '',
+        role_id: "",
         slogan: "",
         website: "",
         join: "",
       },
-      gender: [
-        { label: "保密", value: 1 },
-        { label: "男", value: 2 },
-        { label: "女", value: 3 },
-      ],
-      role: [
-        { label: "超级管理员", value: 1 },
-        { label: "老师", value: 2 },
-        { label: "学生", value: 3 },
-      ],
       formLabelWidth: "120px",
     };
   },
@@ -112,16 +121,14 @@ export default {
     closeDialog() {
       this.$emit("close-dialog");
     },
-    onSubmit(){
-        editUser({
-            user: this.form
-        })
-        .then((res)=>{
-            this.isShow = false
-            this.$emit('edit-finish', res)
-        })
-    }
-
+    onSubmit() {
+      editUser({
+        user: this.form,
+      }).then((res) => {
+        this.isShow = false;
+        this.$emit("edit-finish", res);
+      });
+    },
   },
 };
 </script>
