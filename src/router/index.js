@@ -14,7 +14,9 @@ import Topic from '@/views/post/topic'
 import CategoryDetail from '@/views/post/components/CategoryDetail'
 import Comment from '@/views/comment/comment'
 import Manage from '@/views/comment/manage'
-
+import Report from '@/views/community/report'
+import unreadReport from '@/views/community/unreadReport'
+import readedReport from '@/views/community/readedReport'
 import { getToken } from "@/util/token";
 import { Message } from 'element-ui'
 import NProgress from 'nprogress'//引入nprogress
@@ -163,6 +165,29 @@ const routes = [
                     }
 
                 ]
+            },
+            {
+                path: 'report',
+                name: 'Report',
+                component: Report,
+                children: [
+                    {
+                        path: 'unread',
+                        component: unreadReport,
+                        meta: {
+                            title: '未读举报信息'
+                        },
+
+                    },
+                    {
+                        path: 'readed',
+                        component: readedReport,
+                        meta: {
+                            title: '已读举报消息'
+                        }
+                    }
+                ]
+
             }
 
         ]
