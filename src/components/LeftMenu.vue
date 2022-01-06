@@ -43,6 +43,10 @@
               <el-menu-item index="/post/topic" @click="goSecondPage('/post', '/topic')"
                 ><i class="fa fa-bookmark fa-fw mr"></i>帖子主题</el-menu-item
               >
+
+              <el-menu-item index="/post/topic" @click="goSecondPage('/post', '/tag')"
+                ><i class="fa fa-hashtag fa-fw mr"></i>帖子标签</el-menu-item
+              >
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="4">
@@ -56,6 +60,20 @@
               >
               <el-menu-item index="/comment/analysis" @click="goSecondPage('/comment', '/analysis')"
                 ><i class="fa fa-paw fa-fw mr"></i>评论分析</el-menu-item
+              >
+            </el-menu-item-group>
+          </el-submenu>
+          <el-submenu index="5">
+            <template slot="title">
+              <i class="fa fa-building fa-fw mr"></i>
+              <span>社区管理</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="/comment/manage" @click="goSecondPage('/report', '/unread')"
+                ><i class="fa fa-bullhorn fa-fw mr"></i>举报管理</el-menu-item
+              >
+              <el-menu-item index="/comment/analysis" @click="goSecondPage('/comment', '/analysis')"
+                ><i class="fa fa-pie-chart fa-fw mr"></i>访问统计</el-menu-item
               >
             </el-menu-item-group>
           </el-submenu>
