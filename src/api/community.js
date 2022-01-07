@@ -8,7 +8,15 @@ function unreadReport(params) {
     })
 }
 
+function readReport(params) {
+    return request({
+        url: '/community/report/read',
+        method: 'get',
+        params: params
+    })
+}
 
 export {
-    unreadReport
+    unreadReport,
+    readReport,
 }

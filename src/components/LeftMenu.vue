@@ -69,10 +69,10 @@
               <span>社区管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="/comment/manage" @click="goSecondPage('/report', '/unread')"
+              <el-menu-item index="/report/unread" @click="goSecondPage('/report', '/unread')"
                 ><i class="fa fa-bullhorn fa-fw mr"></i>举报管理</el-menu-item
               >
-              <el-menu-item index="/comment/analysis" @click="goSecondPage('/comment', '/analysis')"
+              <el-menu-item index="/visit/statistics" @click="goSecondPage('/visit', '/statistics')"
                 ><i class="fa fa-pie-chart fa-fw mr"></i>访问统计</el-menu-item
               >
             </el-menu-item-group>
