@@ -188,6 +188,13 @@ const routes = [
                     }
                 ]
 
+            },
+            {
+                path: 'visit/statistics',
+                name: 'VisitStatistics',
+                meta: {
+                    title: '访问统计'
+                }
             }
 
         ]
