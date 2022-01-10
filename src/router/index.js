@@ -213,8 +213,8 @@ router.beforeEach((to, from, next) => {
     let token = getToken('Access-Token')
     NProgress.start()
     if (to.meta.title) {
-        document.title = to.meta.title || '后台管理页面'
-    }
+        document.title = to.meta.title
+    } else document.title = '后台管理页面'
     if (to.name !== 'Login' && !token) {
         next({ name: 'Login' })
         Message({
