@@ -28,15 +28,15 @@ export default {
     changeTab(tag) {
       this.select = tag;
       if (this.select) {
-        this.$router.push("/report/unread");
-      } else this.$router.push("/report/readed");
+        this.$router.push("/report/unread").catch((err) => {});
+      } else this.$router.push("/report/readed").catch((err) => {});
     },
   },
 };
 </script>
 <style scoped>
 #report /deep/ .is-disabled {
-    backdrop-filter: #409EFF;
-    color: white;
+  backdrop-filter: #409eff;
+  color: white;
 }
 </style>
