@@ -60,7 +60,7 @@
         </el-row>
         <el-card class="mt-10">
           <div slot="header">
-            <i class="fa fa-line-chart" style="color: #71cc59"></i>访问统计
+            <i class="fa fa-line-chart mr-3" style="color: #71cc59"></i>访问统计
           </div>
           <el-button-group>
             <el-button
@@ -73,13 +73,13 @@
               :type="dateRange === 'month' ? 'primary' : ''"
               size="mini"
               @click="changeStatisticsRange('month')"
-              >最近一月</el-button
+              >最近半月</el-button
             >
             <el-button
               :type="dateRange === 'halfYear' ? 'primary' : ''"
               size="mini"
               @click="changeStatisticsRange('halfYear')"
-              >最近半年</el-button
+              >最近一月</el-button
             >
           </el-button-group>
           <line-chart class="mt-10"></line-chart>
