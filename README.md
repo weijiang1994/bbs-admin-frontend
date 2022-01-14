@@ -30,5 +30,5 @@ npm run build
 
 ### 效果图
 
-![效果图](/images/img.png)
+![效果图](/images/index.png)
 
