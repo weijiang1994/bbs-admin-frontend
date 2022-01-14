@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" style="width: 100%;height: 300px"></div>
+  <div :id="id" style="width: 100%; height: 330px"></div>
 </template>
 <script>
 import echarts from "echarts";
@@ -13,6 +13,7 @@ export default {
       option: {},
     };
   },
+  props: {},
   mounted() {
     this.initChart();
   },
