@@ -70,19 +70,20 @@
               >最近一周</el-button
             >
             <el-button
-              :type="dateRange === 'month' ? 'primary' : ''"
+              :type="dateRange === 'half' ? 'primary' : ''"
               size="mini"
-              @click="changeStatisticsRange('month')"
+              @click="changeStatisticsRange('half')"
               >最近半月</el-button
             >
             <el-button
-              :type="dateRange === 'halfYear' ? 'primary' : ''"
+              :type="dateRange === 'month' ? 'primary' : ''"
               size="mini"
-              @click="changeStatisticsRange('halfYear')"
+              @click="changeStatisticsRange('month')"
               >最近一月</el-button
             >
           </el-button-group>
-          <line-chart class="mt-10"></line-chart>
+          <Chart :optionData="chartData" class=""></Chart>
+          <!-- <line-chart class="mt-10" :legends="legends"></line-chart> -->
         </el-card>
       </el-col>
       <el-col :span="6">
@@ -129,16 +130,16 @@
 <script>
 import CommunityCard from "@/components/CommunityCard";
 import { latestAdminLog, serverStatus } from "@/api/normal";
+import { visitStatistic } from "@/api/community";
 import QuickLink from "../components/QuickLink.vue";
-import LineChart from "@/components/charts/LineChart";
-import echarts from "echarts";
-
+import Chart from "@/components/charts/Chart";
+import { merge } from "lodash";
 export default {
   name: "Home",
   components: {
     CommunityCard,
     QuickLink,
-    LineChart,
+    Chart,
   },
   data() {
     this.quickDatas = [
@@ -191,41 +192,7 @@ export default {
         cpu: "#5cb87a",
         mem: "#5cb87a",
       },
-    };
-  },
-  created() {
-    latestAdminLog().then((res) => {
-      this.adminLogs = res.data;
-    });
-  },
-  mounted() {
-    this.getServerStatus();
-    this.timer = window.setInterval(() => {
-      setTimeout(() => {
-        this.getServerStatus();
-      }, 0);
-    }, 3 * 1000);
-  },
-  destroyed() {
-    window.clearInterval(this.timer);
-  },
-  methods: {
-    changeStatisticsRange(dateRange) {
-      this.dateRange = dateRange;
-    },
-    initChart() {
-      this.chart = echarts.init(document.getElementById("statistics"), null, {
-        width: 600,
-        height: 400,
-      });
-      this.chart.setOption(this.loadOption());
-      console.log("init chart");
-    },
-    loadOption() {
-      let data = {
-        title: {
-          text: "",
-        },
+      chartData: {
         tooltip: {
           trigger: "axis",
           axisPointer: {
@@ -235,20 +202,11 @@ export default {
             },
           },
         },
-        legend: {
-          data: ["股票", "基金", "债券", "储蓄", "期货"],
-        },
-        grid: {
-          left: "3%",
-          right: "4%",
-          bottom: "3%",
-          containLabel: true,
-        },
         xAxis: [
           {
             type: "category",
             boundaryGap: false,
-            data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+            data: [],
           },
         ],
         yAxis: [
@@ -256,51 +214,49 @@ export default {
             type: "value",
           },
         ],
-        series: [
+        series: [],
+      },
+    };
+  },
+  created() {
+    latestAdminLog().then((res) => {
+      this.adminLogs = res.data;
+    });
+  },
+  mounted() {
+    this.getVisitStatistic();
+    this.getServerStatus();
+    // this.timer = window.setInterval(() => {
+    //   setTimeout(() => {
+    //     this.getServerStatus();
+    //   }, 0);
+    // }, 3 * 1000);
+  },
+  destroyed() {
+    window.clearInterval(this.timer);
+  },
+  methods: {
+    getVisitStatistic() {
+      visitStatistic({ dateRange: this.dateRange }).then((res) => {
+        // console.log(this.chartData);
+        this.chartData.xAxis = [
           {
-            name: "股票",
-            type: "line",
-            stack: "总量",
-            areaStyle: { normal: {} },
-            data: [120, 132, 101, 134, 90, 230, 210],
-          },
-          {
-            name: "基金",
-            type: "line",
-            stack: "总量",
-            areaStyle: { normal: {} },
-            data: [220, 182, 191, 234, 290, 330, 310],
-          },
-          {
-            name: "债券",
-            type: "line",
-            stack: "总量",
-            areaStyle: { normal: {} },
-            data: [150, 232, 201, 154, 190, 330, 410],
-          },
-          {
-            name: "期货",
-            type: "line",
-            stack: "总量",
-            areaStyle: { normal: {} },
-            data: [320, 332, 301, 334, 390, 330, 320],
-          },
-          {
-            name: "储蓄",
-            type: "line",
-            stack: "总量",
-            label: {
-              normal: {
-                show: true,
-                position: "top",
-              },
+            type: "category",
+            boundaryGap: false,
+            axisLabel: {
+              //坐标轴刻度标签的相关设置。
+              interval: 0,
+              rotate: "45",
             },
-            areaStyle: { normal: {} },
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            data: res.dates,
           },
-        ],
-      };
-      return data;
+        ];
+        this.chartData.series = res.series;
+      });
+    },
+    changeStatisticsRange(dateRange) {
+      this.dateRange = dateRange;
+      this.getVisitStatistic();
     },
     getServerStatus() {
       serverStatus().then((res) => {

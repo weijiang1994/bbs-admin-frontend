@@ -16,7 +16,17 @@ function readReport(params) {
     })
 }
 
+
+function visitStatistic(params) {
+    return request({
+        url: '/statistics/index',
+        params: params,
+        method: 'get'
+    })
+}
+
 export {
     unreadReport,
     readReport,
+    visitStatistic
 }
