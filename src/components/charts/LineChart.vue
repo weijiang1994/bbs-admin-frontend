@@ -4,24 +4,45 @@
 <script>
 import echarts from "echarts";
 import chartTheme from "@/components/charts/theme/westeros.json";
+import { merge } from "lodash";
+
 export default {
   name: "LineChart",
   data() {
     return {
       id: "lineChart",
-      chart: null,
-      option: {},
     };
   },
-  props: {},
+  props: {
+    seriesData: {
+      type: Array,
+      default: () => [],
+      require: true,
+    },
+    legends: {
+      type: Array,
+      default: () => [],
+      require: true,
+    },
+  },
+  watch: {
+    legends: {
+      deep: true,
+      hanlder() {
+        console.log('更新了legend');
+        this.chart.setOption(this.loadOption(), true);
+      },
+    },
+  },
   mounted() {
+    console.log(this.legends);
     this.initChart();
   },
   methods: {
     initChart() {
       echarts.registerTheme("westeros", chartTheme);
       this.chart = echarts.init(document.getElementById(this.id), "westeros");
-      this.chart.setOption(this.loadOption());
+      this.chart.setOption(this.loadOption(), true);
     },
     loadOption() {
       let data = {
@@ -38,7 +59,7 @@ export default {
           },
         },
         legend: {
-          data: ["访问量", "基金", "债券", "储蓄", "期货"],
+          data: this.legends,
         },
         grid: {
           left: "3%",
