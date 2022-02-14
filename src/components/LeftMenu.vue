@@ -44,7 +44,7 @@
                 ><i class="fa fa-bookmark fa-fw mr"></i>帖子主题</el-menu-item
               >
 
-              <el-menu-item index="/post/topic" @click="goSecondPage('/post', '/tag')"
+              <el-menu-item index="/post/tag" @click="goSecondPage('/post', '/tag')"
                 ><i class="fa fa-hashtag fa-fw mr"></i>帖子标签</el-menu-item
               >
             </el-menu-item-group>
