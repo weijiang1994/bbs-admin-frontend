@@ -226,11 +226,11 @@ export default {
   mounted() {
     this.getVisitStatistic();
     this.getServerStatus();
-    // this.timer = window.setInterval(() => {
-    //   setTimeout(() => {
-    //     this.getServerStatus();
-    //   }, 0);
-    // }, 3 * 1000);
+    this.timer = window.setInterval(() => {
+      setTimeout(() => {
+        this.getServerStatus();
+      }, 0);
+    }, 3 * 1000);
   },
   destroyed() {
     window.clearInterval(this.timer);
