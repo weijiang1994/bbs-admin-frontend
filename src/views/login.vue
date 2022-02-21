@@ -1,42 +1,50 @@
 <template>
   <div class="login-container">
-    <el-form
-      :model="loginForm"
-      :rules="validateRule"
-      status-icon
-      ref="loginForm"
-      label-position="left"
-      label-width="0px"
-      class="demo-ruleForm login-page"
-    >
-      <h3 class="title">系统登录</h3>
-      <el-form-item prop="username">
-        <el-input
-          type="text"
-          v-model="loginForm.username"
-          auto-complete="off"
-          placeholder="用户名"
-        ></el-input>
-      </el-form-item>
-      <el-form-item prop="password">
-        <el-input
-          type="password"
-          v-model="loginForm.password"
-          auto-complete="off"
-          placeholder="密码"
-        ></el-input>
-      </el-form-item>
-      <el-checkbox v-model="checked" class="rememberme">记住密码</el-checkbox>
-      <el-form-item style="width: 100%">
-        <el-button
-          type="primary"
-          style="width: 50%"
-          @click="handleSubmit"
-          :loading="logining"
-          >登录</el-button
+    <h3 class="login-title">系统登录</h3>
+    <el-card shadow="never">
+      <div>
+        <el-form
+          :model="loginForm"
+          :rules="validateRule"
+          status-icon
+          ref="loginForm"
+          label-position="left"
+          label-width="0px"
+          class="demo-ruleForm login-page"
         >
-      </el-form-item>
-    </el-form>
+          <el-form-item prop="username">
+            <el-input
+              type="text"
+              v-model="loginForm.username"
+              auto-complete="off"
+              placeholder="用户名"
+            ></el-input>
+          </el-form-item>
+          <el-form-item prop="password">
+            <el-input
+              type="password"
+              v-model="loginForm.password"
+              auto-complete="off"
+              placeholder="密码"
+            ></el-input>
+          </el-form-item>
+          <el-checkbox v-model="checked" class="rememberme"
+            >记住密码</el-checkbox
+          >
+          <el-form-item style="width: 100%">
+            <div style="text-align: center">
+              <el-button
+                type="primary"
+                style="width: 50%"
+                @click="handleSubmit"
+                :loading="logining"
+                >登录</el-button
+              >
+            </div>
+          </el-form-item>
+        </el-form>
+      </div>
+    </el-card>
   </div>
 </template>
 
@@ -84,15 +92,15 @@ export default {
             .then((res) => {
               if (res.code === 200) {
                 this.showMessage(res.msg || "登录成功", "success");
-                setToken("Access-Token", 'Bearer ' + res.access_token);
+                setToken("Access-Token", "Bearer " + res.access_token);
                 this.$router.push("/");
                 this.logining = false;
               }
             })
-            .catch(error =>{
+            .catch((error) => {
               this.logining = false;
               console.log(error);
-            })
+            });
         }
       });
     },
@@ -108,31 +116,29 @@ export default {
 </script>
 
 <style scoped>
-.login-container {
-  width: 100%;
-  height: 100%;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.login-title {
+  background: rgb(86 132 135);
   text-align: center;
-  color: #2c3e50;
+  color: white;
+  padding: 4px 0px;
+  margin-bottom: 0;
 }
-.login-page {
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  margin: 180px auto;
-  width: 350px;
-  padding: 35px 35px 15px;
-  background: #fff;
-  border: 1px solid #eaeaea;
-  box-shadow: 0 0 25px #cac6c6;
+.login-container {
+  height: 100%;
+  display: flex;
+  margin: 0 40%;
+  flex-direction: column;
+  justify-content: center;
 }
 label.el-checkbox.rememberme {
   margin: 0px 0px 15px;
   text-align: left;
 }
 
-h3{
+h3 {
   margin-bottom: 5px;
+}
+/deep/ .el-card {
+  border-radius: 0;
 }
 </style>
