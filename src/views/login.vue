@@ -1,50 +1,53 @@
 <template>
   <div class="login-container">
-    <h3 class="login-title">系统登录</h3>
-    <el-card shadow="never">
-      <div>
-        <el-form
-          :model="loginForm"
-          :rules="validateRule"
-          status-icon
-          ref="loginForm"
-          label-position="left"
-          label-width="0px"
-          class="demo-ruleForm login-page"
-        >
-          <el-form-item prop="username">
-            <el-input
-              type="text"
-              v-model="loginForm.username"
-              auto-complete="off"
-              placeholder="用户名"
-            ></el-input>
-          </el-form-item>
-          <el-form-item prop="password">
-            <el-input
-              type="password"
-              v-model="loginForm.password"
-              auto-complete="off"
-              placeholder="密码"
-            ></el-input>
-          </el-form-item>
-          <el-checkbox v-model="checked" class="rememberme"
-            >记住密码</el-checkbox
+    <div class="login-content">
+      <h3 class="login-title">系统登录</h3>
+      <el-card shadow="never">
+        <div>
+          <el-form
+            :model="loginForm"
+            :rules="validateRule"
+            status-icon
+            ref="loginForm"
+            label-position="left"
+            label-width="0px"
+            class="demo-ruleForm login-page"
           >
-          <el-form-item style="width: 100%">
-            <div style="text-align: center">
-              <el-button
-                type="primary"
-                style="width: 50%"
-                @click="handleSubmit"
-                :loading="logining"
-                >登录</el-button
-              >
-            </div>
-          </el-form-item>
-        </el-form>
-      </div>
-    </el-card>
+            <el-form-item prop="username">
+              <el-input
+                type="text"
+                v-model="loginForm.username"
+                auto-complete="off"
+                placeholder="用户名"
+              ></el-input>
+            </el-form-item>
+            <el-form-item prop="password">
+              <el-input
+                type="password"
+                v-model="loginForm.password"
+                auto-complete="off"
+                placeholder="密码"
+              ></el-input>
+            </el-form-item>
+            <el-checkbox v-model="checked" class="rememberme"
+              >记住密码</el-checkbox
+            >
+            <el-form-item style="width: 100%">
+              <div style="text-align: center">
+                <el-button
+                  type="primary"
+                  style="width: 50%"
+                  @click="handleSubmit"
+                  :loading="logining"
+                  size="medium"
+                  >登录</el-button
+                >
+              </div>
+            </el-form-item>
+          </el-form>
+        </div>
+      </el-card>
+    </div>
   </div>
 </template>
 
@@ -120,13 +123,15 @@ export default {
   background: rgb(86 132 135);
   text-align: center;
   color: white;
-  padding: 4px 0px;
+  padding: 8px 0px;
   margin-bottom: 0;
 }
 .login-container {
+  background-image: url(../assets/login-bg.jpg);
+  background-size: 100% 100%;
+  background-position: center center;
   height: 100%;
   display: flex;
-  margin: 0 40%;
   flex-direction: column;
   justify-content: center;
 }
@@ -138,7 +143,19 @@ label.el-checkbox.rememberme {
 h3 {
   margin-bottom: 5px;
 }
-/deep/ .el-card {
+.login-container /deep/ .el-card {
   border-radius: 0;
+}
+.login-container /deep/ .el-card__body {
+  padding-bottom: 3px;
+}
+.login-content{
+  margin: 0 40%;
+}
+
+@media screen and (max-width: 768px) {
+  .login-content{
+    margin: 0 25%;
+  }
 }
 </style>
