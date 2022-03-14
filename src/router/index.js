@@ -17,6 +17,7 @@ import Manage from '@/views/comment/manage'
 import Report from '@/views/community/report'
 import unreadReport from '@/views/community/unreadReport'
 import readedReport from '@/views/community/readedReport'
+import configure from "../views/community/configure";
 import { getToken } from "@/util/token";
 import { Message } from 'element-ui'
 import NProgress from 'nprogress'//引入nprogress
@@ -195,7 +196,15 @@ const routes = [
                 meta: {
                     title: '访问统计'
                 }
-            }
+            },
+            {
+                path: 'community/configure',
+                name: 'Configure',
+                component: configure,
+                meta: {
+                    title: '系统配置'
+                }
+            },
 
         ]
     }

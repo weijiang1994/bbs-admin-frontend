@@ -25,8 +25,17 @@ function visitStatistic(params) {
     })
 }
 
+function getConfiguration(params) {
+    return request({
+        url: '/community/configuration',
+        method: 'get',
+        params
+    })
+}
+
 export {
     unreadReport,
     readReport,
-    visitStatistic
+    visitStatistic,
+    getConfiguration
 }

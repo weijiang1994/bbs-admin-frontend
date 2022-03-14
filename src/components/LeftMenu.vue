@@ -75,6 +75,9 @@
               <el-menu-item index="/visit/statistics" @click="goSecondPage('/visit', '/statistics')"
                 ><i class="fa fa-pie-chart fa-fw mr"></i>访问统计</el-menu-item
               >
+              <el-menu-item index="/community/configure" @click="goSecondPage('/community', '/configure')"
+              ><i class="fa fa-pie-chart fa-fw mr"></i>系统配置</el-menu-item
+              >
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
