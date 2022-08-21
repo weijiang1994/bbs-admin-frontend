@@ -185,8 +185,8 @@ export default {
         })
         .catch(() => {});
     },
-    onPostDetail(row){
-      this.$router.push(`/post/detail/${row.id}`)
+    onPostDetail(row) {
+      this.$router.push(`/post/detail/${row.id}`);
     },
   },
 };
