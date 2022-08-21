@@ -26,11 +26,7 @@
       ></el-table-column>
       <el-table-column prop="nickname" label="昵称" sortable width="120">
       </el-table-column>
-      <el-table-column
-        prop="email"
-        label="邮箱"
-        show-overflow-tooltip
-      >
+      <el-table-column prop="email" label="邮箱" show-overflow-tooltip>
       </el-table-column>
       <el-table-column prop="gender" label="性别" sortable width="100">
       </el-table-column>
@@ -117,7 +113,7 @@
 </template>
 
 <script>
-import Pagination from '@/components/Pagination'
+import Pagination from "@/components/Pagination";
 import {
   getUserList,
   banUser,
@@ -149,7 +145,7 @@ export default {
       selectedRow: [],
       editDialog: {
         show: false,
-        dialogRow: {}
+        dialogRow: {},
       },
     };
   },
@@ -159,7 +155,7 @@ export default {
     },
     onEditUser(row) {
       this.editDialog.show = true;
-      this.editDialog.dialogRow = {...row}
+      this.editDialog.dialogRow = { ...row };
     },
 
     // 封禁用户
@@ -270,10 +266,10 @@ export default {
         })
         .catch(() => {});
     },
-    userEditFinish(datas){
-      this.showNotify(datas.msg, '成功', 'success')
-      this.getUser()
-    }
+    userEditFinish(datas) {
+      this.showNotify(datas.msg, "成功", "success");
+      this.getUser();
+    },
   },
   created() {
     this.getUser();

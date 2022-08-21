@@ -17,7 +17,7 @@ body {
 #app {
   height: 100%;
 }
-.el-header{
+.el-header {
   padding: 0;
 }
 </style>
